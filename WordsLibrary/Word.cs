@@ -9,7 +9,6 @@
         public Word(params string[] translations)
         {
             this.Translations = translations;
-            Console.WriteLine("Från konstruktorn: " + this.Translations[0]);
         }
 
         public Word(int fromLanguage, int toLanguage, params string[] translations)
