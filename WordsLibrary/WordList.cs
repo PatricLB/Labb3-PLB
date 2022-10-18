@@ -58,7 +58,6 @@ namespace WordsLibrary
         public void Save()
         {
             // Sparar listan till en fil med samma namn som listan och filändelse .dat 
-
             if (Directory.Exists(sökväg))
             {
                 string helaSökvägenTillFilen;
@@ -70,11 +69,12 @@ namespace WordsLibrary
                     skrivTillFil.NewLine = "\n";
                     for (int i = 0; i < listaMedOrd.Count; i++)
                     {
+                        skrivTillFil.WriteLine();
                         foreach (var ord in listaMedOrd[i].Translations)
                         {
                             skrivTillFil.Write(ord + Separator);
                         }
-                        skrivTillFil.WriteLine();
+                        
 
                     }
                 }
