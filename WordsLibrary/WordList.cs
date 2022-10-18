@@ -64,20 +64,22 @@ namespace WordsLibrary
                 string helaSökvägenTillFilen;
                 Console.WriteLine($"Name är: {this.Name}");
                 helaSökvägenTillFilen = Path.Combine(sökväg, this.Name + ".dat");
-
+                
                 using (StreamWriter skrivTillFil = File.AppendText(helaSökvägenTillFilen))
                 {
-                    skrivTillFil.WriteLine();
+                    skrivTillFil.NewLine = "\n";
                     for (int i = 0; i < listaMedOrd.Count; i++)
                     {
                         foreach (var ord in listaMedOrd[i].Translations)
                         {
-                            skrivTillFil.Write(i == 0 ? ord + Separator : Separator + ord + Separator);
+                            skrivTillFil.Write(ord + Separator);
                         }
-                       skrivTillFil.WriteLine();
-                       
+                        skrivTillFil.WriteLine();
+
                     }
                 }
+
+                
             }
 
 
@@ -85,8 +87,13 @@ namespace WordsLibrary
 
         public void Add(params string[] translations)
         {
+            string[] tempString = new string[translations.Length];
+            for (int i = 0; i < tempString.Length; i++)
+            {
+                tempString[i] = translations[i];
+            }
 
-            listaMedOrd.Add(new Word(translations));
+            listaMedOrd.Add(new Word(tempString));
 
         }
 
