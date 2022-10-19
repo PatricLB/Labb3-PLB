@@ -29,18 +29,17 @@ namespace Console
                 string name = "example2";
                 string[] språk = new string[2] { "Engelska", "Svenska" };
                 ListaListor();
-                var ord = WordList.LoadList("example2");
-               // System.Console.WriteLine($"Current list is: {ord.Name}");
-
-                // Så här skall consoleprogrammet skicka in datan.
-                var ordLista = new WordList("ExempelPåLista2", "Engelska", "Svenska", "Tyska");
+                var ord = WordList.LoadList(name);
+                var ordLista = new WordList("ExempelPåLista6", "Engelska", "Svenska");
                 System.Console.WriteLine($"Current list is: {ordLista.Name}");
-                //ordLista.Add();
+
+                //läggTillOrdILista(ordLista);
+
+                //SkapaLista(ordLista.Name, ordLista.Languages);
+                //läggTillOrdILista(ordLista);
+                //läggTillOrdILista(ordLista);
                 //ordLista.Save();
 
-                SkapaLista(ordLista.Name, ordLista.Languages);
-                läggTillOrdILista(ordLista);
-                ordLista.Save();
 
 
             }
@@ -48,34 +47,42 @@ namespace Console
 
         public static void läggTillOrdILista(WordList words)
         {
-            string[]? ord = new string[words.Languages.Length];
-            bool läggTillFler = true;
-            int index = 0;
-            string temp = string.Empty;
-            do
+            if (words.Languages.Length == 0)
             {
-                foreach (var language in words.Languages)
+                System.Console.WriteLine("Inget giltligt värde.");
+            }
+            else
+            {
+                string[]? ord = new string[words.Languages.Length];
+                bool läggTillFler = true;
+                int index = 0;
+                string temp = string.Empty;
+                do
                 {
-                    System.Console.WriteLine($"Skriv in ett ord på {language}: ");
-                    temp = System.Console.ReadLine();
-                    
-                    if (String.IsNullOrWhiteSpace(temp))
+                    foreach (var language in words.Languages)
                     {
-                        läggTillFler = false;
-                        break;
+                        System.Console.WriteLine($"Skriv in ett ord på {language}: ");
+                        temp = System.Console.ReadLine();
+
+                        if (String.IsNullOrWhiteSpace(temp))
+                        {
+                            läggTillFler = false;
+                            break;
+                        }
+                        ord[index] = temp;
+                        index++;
+
                     }
-                    ord[index] = temp;
-                    index++;
 
-                }
+                    if (läggTillFler)
+                    {
+                        words.Add(ord);
+                    }
 
-                if (läggTillFler)
-                {
-                    words.Add(ord);
-                }
+                    index = 0;
+                } while (läggTillFler);
 
-                index = 0;
-            } while (läggTillFler);
+            }
         }
 
         public static void ListaListor()
@@ -87,7 +94,7 @@ namespace Console
 
             }
         }
-        public static void SkapaLista(string name, params string[] languages)
+        public static WordList SkapaLista(string name, params string[] languages)
         {
             string fullSökVäg = WordList.sökväg + $"\\{name}.dat";
             if (!File.Exists(fullSökVäg))
@@ -111,12 +118,15 @@ namespace Console
                 }
 
                 System.Console.WriteLine("sökväg finns inte, skapar...");
-
+                läggTillOrdILista(newList);
+                newList.Save();
+                return newList;
                 //Directory.CreateDirectory(WordList.sökväg);
             }
             else
             {
                 System.Console.WriteLine("Listan finns redan");
+                return null;
             }
         }
         public static string ListaAntalOrd(WordList ordlista)
