@@ -30,16 +30,20 @@ namespace Console
                 string[] språk = new string[2] { "Engelska", "Svenska" };
                 ListaListor();
                 var ord = WordList.LoadList(name);
-                var ordLista = new WordList("ExempelPåLista6", "Engelska", "Svenska");
-                System.Console.WriteLine($"Current list is: {ordLista.Name}");
+                //var ordLista = new WordList("ExempelPåLista6", "Engelska", "Svenska");
+                System.Console.WriteLine($"Current list is: {ord.Name}");
 
                 //läggTillOrdILista(ordLista);
 
-                //SkapaLista(ordLista.Name, ordLista.Languages);
-                //läggTillOrdILista(ordLista);
+                //var listaMedOrd = SkapaLista("fyraSpråk", "Engelska", "Svenska", "Tyska", "Spanska");
                 //läggTillOrdILista(ordLista);
                 //ordLista.Save();
+                //läggTillOrdILista(listaMedOrd);
+                //listaMedOrd.Save();
+                läggTillOrdILista(ord);
+                ord.Save();
 
+                //.GetWordToPractice();
 
 
             }
@@ -96,7 +100,7 @@ namespace Console
         }
         public static WordList SkapaLista(string name, params string[] languages)
         {
-            string fullSökVäg = WordList.sökväg + $"\\{name}.dat";
+            string fullSökVäg = WordList.folderPath + $"\\{name}.dat";
             if (!File.Exists(fullSökVäg))
             {
                 var newList = new WordList(name, languages);
