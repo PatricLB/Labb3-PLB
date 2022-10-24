@@ -62,13 +62,17 @@
 
                 using (StreamWriter writeToFile = new StreamWriter(helaSökvägenTillFilen))
                 {
-                    foreach (var language in this.Languages)
+
+                    //Consider using Join here instead
+                    // Or use Linq query syntax to get Languages in a string. Then write that string to the file.
+                    foreach (var language in Languages)
                     {
                         writeToFile.Write(language + separator);
                     }
-                    for (int i = 1; i < listWithWords.Count; i++)
+                    writeToFile.WriteLine();
+                    for (int i = 0; i < listWithWords.Count; i++)
                     {
-                        writeToFile.WriteLine();
+
                         foreach (var ord in listWithWords[i].Translations)
                         {
                             if (ord.Last().Equals(';'))
@@ -81,7 +85,7 @@
                             }
 
                         }
-
+                        writeToFile.WriteLine();
                     }
 
                 }
@@ -94,12 +98,12 @@
             string[] tempString = new string[translations.Length];
 
             // Har man inte med detta så tar programmet endast det sista värdet man skrev. Ingen aning varför för den borde lägga in en likadan array.
-            for (int i = 0; i < tempString.Length; i++)
-            {
-                tempString[i] = translations[i];
-            }
+            //for (int i = 0; i < tempString.Length; i++)
+            //{
+            //    tempString[i] = translations[i];
+           // }
+            listWithWords.Add(new Word(translations));
 
-            listWithWords.Add(new Word(tempString));
         }
 
         public bool Remove(int translation, string word)
@@ -107,49 +111,44 @@
             // translation motsvarar index i Languages. Sök igenom språket och ta bort ordet.
             // Returnerar true om ordet fanns(och alltså tagits bort), annars false.
 
-            //Spelar det någon roll vilket språk man anger ifall man ändå bra skall ta bort hela ordet? Alltså båda översättningarna?
+            //var whatToRemove = from w in listWithWords
+            //                   where w.Translations[translation].Equals(word)
+            //                   select w;
 
-            return true;
+            var WhatToRemoveLM = listWithWords.Find(w => w.Translations[translation].Equals(word));
+
+            if (WhatToRemoveLM != null)
+            {
+                return listWithWords.Remove(WhatToRemoveLM);
+            }
+            return false;
+
         }
 
         public int Count()
         {
             // Räknar och returnerar antal ord i listan. 
-            Console.WriteLine($"Name är: {this.Name}");
-            string nysökväg = Path.Combine(folderPath, Name + ".dat");
 
-            Console.WriteLine(nysökväg);
-            int antalOrd = 0;
-            try
-            {
-                using (StreamReader sr = new StreamReader(nysökväg))
-                {
-                    string? line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        antalOrd++;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("The file could not be read:");
-                Console.WriteLine(e.Message);
-            }
+            return listWithWords.Count;
 
-            return antalOrd - 1;
         }
         public void List(int sortByTranslation, Action<string[]> showTranslations)
         {
             // sortByTranslation = Vilket språk listan ska sorteras på.
             // showTranslations = Callback som anropas för varje ord i listan.
 
-            //Förstår inte riktigt hur man skall använda action här. 
-            // Man bör använda sig utav LinQ här?
+            var sortedList = from sl in listWithWords
+                             orderby sl.Translations[sortByTranslation]
+                             select sl;
+
+
+            foreach (var ord in sortedList)
+            {
+                showTranslations.Invoke(ord.Translations);
+            }
 
 
         }
-
         public Word GetWordToPractice()
         {
             // Returnerar slumpmässigt Word från listan
@@ -157,16 +156,22 @@
             // Är FromLanguage == 0 så skall man äversätta från språket på första platsen i listan. ToLanguage är sedan språket man skall översätta till. 
 
             Random randomLanguage = new Random();
+            int fromLanguage = randomLanguage.Next(Languages.Length);
+            int toLanguage = randomLanguage.Next(Languages.Length);
 
-            // fortfarande osäker på hur man skall använda From/ToLanguage då dem är read only. När skall man sätta värdet om inte i add() där man anropar konstruktorn? 
-            Console.WriteLine("GetWordToPractice skriver ut: " + this.listWithWords[2].Translations[0]);
+            while (fromLanguage == toLanguage) 
+            {
+                fromLanguage++;
+                if(fromLanguage >= Languages.Length)
+                {
+                    fromLanguage = 0;
+                }
+            }
+            var randomOrd = listWithWords[Random.Shared.Next(listWithWords.Count)];
+            var ord = new Word(fromLanguage, toLanguage, randomOrd.Translations);
 
-
-            
-
-            return new Word();
+            return ord;
         }
-
 
     }
 }
