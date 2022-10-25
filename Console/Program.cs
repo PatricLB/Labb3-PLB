@@ -8,9 +8,26 @@ namespace Console
         {
             if (!Directory.Exists(WordList.folderPath))
                 Directory.CreateDirectory(WordList.folderPath);
-            string nameOfList = args[1];
+
+            string nameOfList = String.Empty;
+
+            if (args.Length == 0)
+                IncorrectAmountOfParameters();
+
+            if (args.Length == 1)
+                nameOfList = String.Empty;
+            else
+                nameOfList = args[1];
+
             switch (args[0].ToLower())
             {
+                case "-lists": 
+                    if (args.Length < 2)
+                        PrintAllLists();
+                    else
+                        IncorrectAmountOfParameters();
+                    break;
+
                 case "-new":
                     List<string> lang = new List<string>();
                     for (int i = 2; i < args.Length; i++)
@@ -20,56 +37,22 @@ namespace Console
                     CreateList(nameOfList, lang.ToArray());
                     break;
 
-                
-            }
-
-            if (args.Length == 0)
-            {
-                IncorrectAmountOfParameters();
-            }
-            if (args.Length == 1)
-            {
-                if (args[0].ToLower() == "-lists" && args.Length < 2)
-                    PrintAllLists();
-
-                else
-                    IncorrectAmountOfParameters();
-            }
-            if (args.Length > 1)
-            {
-                
-
-                if (args[0].ToLower() == "-new")
-                {
-                    List<string> lang = new List<string>();
-                    for (int i = 2; i < args.Length; i++)
-                    {
-                        lang.Add(args[i]);
-                    }
-                    CreateList(nameOfList, lang.ToArray());
-                }
-
-                if (args[0].ToLower() == "-add")
-                {
+                case "-add":
                     if (args.Length == 2)
-                    {
                         try
                         {
                             var listToAddWordsTo = WordList.LoadList(nameOfList);
                             AddWordToList(listToAddWordsTo);
-                            listToAddWordsTo.Save();
                         }
                         catch (Exception e)
                         {
                             System.Console.WriteLine($"Could not add words to list."); ;
                         }
-                    }
                     else
                         IncorrectAmountOfParameters();
-                }
+                    break;
 
-                if (args[0].ToLower() == "-remove")
-                {
+                case "-remove":
                     try
                     {
                         var listToRemoveWordsFrom = WordList.LoadList(nameOfList.ToLower());
@@ -77,6 +60,7 @@ namespace Console
 
                         int lengthOfWordArray = args.Length - 3;
                         string[] wordsToRemove = new string[lengthOfWordArray];
+
                         int index = Array.IndexOf(listToRemoveWordsFrom.Languages, language);
                         int wordCount = 0;
 
@@ -101,10 +85,9 @@ namespace Console
 
                     }
                     catch (Exception NullReferenceException){}
-                }
+                    break;
 
-                if (args[0].ToLower() == "-words")
-                {
+                case "-words":
                     var wordsToSort = WordList.LoadList(nameOfList);
                     if (args.Length == 3)
                     {
@@ -122,10 +105,9 @@ namespace Console
                     }
                     else
                         IncorrectAmountOfParameters();
-                }
+                    break;
 
-                if (args[0].ToLower() == "-count")
-                {
+                case "-count":
                     try
                     {
                         if (args.Length == 2)
@@ -137,11 +119,10 @@ namespace Console
                             IncorrectAmountOfParameters();
 
                     }
-                    catch (Exception){}
-                }
+                    catch (Exception) { }
+                    break;
 
-                if (args[0].ToLower() == "-practice")
-                {
+                case "-practice":
                     if (args.Length == 2)
                     {
                         var listToTrain = WordList.LoadList(nameOfList);
@@ -149,7 +130,12 @@ namespace Console
                     }
                     else
                         IncorrectAmountOfParameters();
-                }
+                    break;
+
+                default:
+                    IncorrectAmountOfParameters();
+                    break;
+
             }
         }
 
@@ -277,6 +263,7 @@ namespace Console
                     }
                     index = 0;
                 } while (addMore);
+                words.Save();
                 System.Console.WriteLine($"Done adding words to list: {words.Name}");
             }
         }
@@ -291,6 +278,7 @@ namespace Console
         }
         public static bool RemoveWordFromList(WordList wordList, int translation, string word)
         {
+
             return wordList.Remove(translation, word.ToLower());
         }
         public static string CountWordsInList(WordList wordList)
