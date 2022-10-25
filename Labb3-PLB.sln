@@ -11,6 +11,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordsLibrary", "WordsLibrary\WordsLibrary.csproj", "{E89F9277-B1BA-4179-8AFC-83B9EA79E8E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GUI-App", "GUI-App\GUI-App.csproj", "{09AE78C2-9676-4B48-BA38-5C90D0BCE9B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E89F9277-B1BA-4179-8AFC-83B9EA79E8E3} = {E89F9277-B1BA-4179-8AFC-83B9EA79E8E3}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

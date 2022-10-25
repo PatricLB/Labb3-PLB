@@ -83,7 +83,6 @@ namespace Console
                                 System.Console.WriteLine("Word did not exist in list or in the specified language.");
                             }
                         }
-
                     }
                     catch (Exception NullReferenceException){}
                     break;
@@ -118,7 +117,6 @@ namespace Console
                         }
                         else
                             IncorrectAmountOfParameters();
-
                     }
                     catch (Exception) { }
                     break;
@@ -136,10 +134,8 @@ namespace Console
                 default:
                     IncorrectAmountOfParameters();
                     break;
-
             }
         }
-
         public static void TrainWords(WordList name)
         {
             int correctAnswers = 0;

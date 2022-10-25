@@ -11,7 +11,6 @@
         private static string[]? languageRow;
         public static readonly string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Labb3");
 
-
         public WordList(string name, params string[] languages)
         {
             // Konstruktor. Sätter properites Name och Languages till parametrarnas värden.
@@ -33,7 +32,6 @@
         }
         public static WordList LoadList(string name)
         {
-            // Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
             try
             {
                 string[] words = File.ReadAllLines(Path.Combine(folderPath, name + ".dat"));
@@ -64,7 +62,6 @@
         }
         public void Save()
         {
-            // Sparar listan till en fil med samma namn som listan och filändelse .dat 
             if (Directory.Exists(folderPath))
             {
                 string helaSökvägenTillFilen;
@@ -72,9 +69,6 @@
 
                 using (StreamWriter writeToFile = new StreamWriter(helaSökvägenTillFilen))
                 {
-
-                    //Consider using Join here instead
-                    // Or use Linq query syntax to get Languages in a string. Then write that string to the file.
                     foreach (var language in Languages)
                     {
                         writeToFile.Write(language.ToLower() + separator);
@@ -82,37 +76,28 @@
                     writeToFile.WriteLine();
                     for (int i = 0; i < listWithWords.Count; i++)
                     {
-
-                        foreach (var ord in listWithWords[i].Translations)
+                        foreach (var word in listWithWords[i].Translations)
                         {
-                            if (ord.Last().Equals(';'))
+                            if (word.Last().Equals(';'))
                             {
-                                writeToFile.Write(ord);
+                                writeToFile.Write(word);
                             }
                             else
                             {
-                                writeToFile.Write(ord + separator);
+                                writeToFile.Write(word + separator);
                             }
-
                         }
                         writeToFile.WriteLine();
                     }
-
                 }
-
             }
-
         }
         public void Add(params string[] translations)
         {
             listWithWords.Add(new Word(translations));
         }
-
         public bool Remove(int translation, string word)
         {
-            // translation motsvarar index i Languages. Sök igenom språket och ta bort ordet.
-            // Returnerar true om ordet fanns(och alltså tagits bort), annars false.
-
             //var whatToRemove = from w in listWithWords
             //                   where w.Translations[translation].Equals(word)
             //                   select w;
@@ -125,13 +110,9 @@
             }
             return false;
         }
-
         public int Count()
         {
-            // Räknar och returnerar antal ord i listan. 
-
             return listWithWords.Count;
-
         }
         public void List(int sortByTranslation, Action<string[]> showTranslations)
         {
@@ -143,7 +124,6 @@
             {
                 showTranslations.Invoke(ord.Translations);
             }
-
 
         }
         public Word GetWordToPractice()
@@ -160,10 +140,10 @@
                     fromLanguage = 0;
                 }
             }
-            var randomOrd = listWithWords[Random.Shared.Next(listWithWords.Count)];
-            var ord = new Word(fromLanguage, toLanguage, randomOrd.Translations);
+            var randomWord = listWithWords[Random.Shared.Next(listWithWords.Count)];
+            var returnWord = new Word(fromLanguage, toLanguage, randomWord.Translations);
 
-            return ord;
+            return returnWord;
         }
 
     }
