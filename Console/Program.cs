@@ -1,4 +1,5 @@
-﻿using WordsLibrary;
+﻿using System.Linq.Expressions;
+using WordsLibrary;
 
 namespace Console
 {
@@ -13,8 +14,7 @@ namespace Console
 
             if (args.Length == 0)
                 IncorrectAmountOfParameters();
-
-            if (args.Length == 1)
+            else if (args.Length == 1)
                 nameOfList = String.Empty;
             else
                 nameOfList = args[1];
@@ -43,6 +43,7 @@ namespace Console
                         {
                             var listToAddWordsTo = WordList.LoadList(nameOfList);
                             AddWordToList(listToAddWordsTo);
+
                         }
                         catch (Exception e)
                         {
@@ -95,13 +96,13 @@ namespace Console
                         {
                             int index = Array.IndexOf(wordsToSort.Languages, args[2].ToLower());
 
-                            wordsToSort.List(index, s => { System.Console.WriteLine(String.Join("\t |  ", s)); });
-                        }
+                            wordsToSort.List(index, s => { System.Console.WriteLine(String.Join("\t | ", s)); });
+                        }else
                         System.Console.WriteLine("Language does not exist. Try again.");
                     }
                     else if (args.Length < 3)
                     {
-                        wordsToSort.List(0, s => { System.Console.WriteLine(String.Join("\t |  ", s)); });
+                        wordsToSort.List(0, s => { System.Console.WriteLine(String.Join("\t | ", s)); });
                     }
                     else
                         IncorrectAmountOfParameters();
@@ -181,7 +182,8 @@ namespace Console
             } while (continueTraining);
             float totalSum = ((float)correctAnswers / timesPracticed) * 100;
 
-            System.Console.WriteLine($"You got {Math.Round(totalSum)}% of the answers correct! ");
+            System.Console.WriteLine($"You practiced {timesPracticed} words.");
+            System.Console.WriteLine($"You got {Math.Round(totalSum)}% of the words answered correctly! ");
 
         }
         public static WordList CreateList(string name, params string[] languages)
@@ -310,6 +312,7 @@ namespace Console
             {
                 System.Console.WriteLine(choice);
             }
+            Environment.Exit(0);
         }
     }
 }

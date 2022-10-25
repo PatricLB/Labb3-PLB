@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Console": {
-      "commandName": "Project",
-      "commandLineArgs": "-practice example2"
+      "commandName": "Project"
     }
   }
 }
