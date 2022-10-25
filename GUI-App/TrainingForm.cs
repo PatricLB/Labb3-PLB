@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI_App
 {
-    public partial class Form2 : Form
+    public partial class TrainingForm : Form
     {
-        public Form2()
+        public TrainingForm()
         {
             InitializeComponent();
         }

@@ -1,6 +1,6 @@
 ﻿namespace GUI_App
 {
-    partial class Form2
+    partial class TrainingForm
     {
         /// <summary>
         /// Required designer variable.
