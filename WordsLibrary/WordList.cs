@@ -34,22 +34,33 @@
         public static WordList LoadList(string name)
         {
             // Laddar in ordlistan (name anges utan filändelse) och returnerar som WordList. 
-
-            string[] words = File.ReadAllLines(Path.Combine(folderPath, name + ".dat"));
-            string[] currentRow = new string[words.Length];
-
-            languageRow = words[0].Split(separator);
-            languageRow = languageRow.SkipLast(1).ToArray();
-
-            var myWordList = new WordList(name, languageRow);
-            for (int i = 1; i < words.Length; i++)
+            try
             {
-                currentRow = words[i].Split(separator);
-                currentRow = currentRow.SkipLast(1).ToArray();
-                myWordList.Add(currentRow);
-            }
+                string[] words = File.ReadAllLines(Path.Combine(folderPath, name + ".dat"));
 
-            return myWordList;
+                string[] currentRow = new string[words.Length];
+
+                languageRow = words[0].ToLower().Split(separator);
+                languageRow = languageRow.SkipLast(1).ToArray();
+
+                var myWordList = new WordList(name, languageRow);
+                for (int i = 1; i < words.Length; i++)
+                {
+                    currentRow = words[i].Split(separator);
+                    currentRow = currentRow.SkipLast(1).ToArray();
+                    myWordList.Add(currentRow);
+                }
+
+                return myWordList;
+
+            }
+            catch (Exception e)
+            {
+                if (e.GetType().Name == "FileNotFoundException")
+                    Console.WriteLine($"List could not be loaded. File was not found.");
+
+                return null;
+            }
         }
         public void Save()
         {
@@ -57,8 +68,7 @@
             if (Directory.Exists(folderPath))
             {
                 string helaSökvägenTillFilen;
-                Console.WriteLine($"Sparar filen: {this.Name}...");
-                helaSökvägenTillFilen = Path.Combine(folderPath, this.Name + ".dat");
+                helaSökvägenTillFilen = Path.Combine(folderPath, Name + ".dat");
 
                 using (StreamWriter writeToFile = new StreamWriter(helaSökvägenTillFilen))
                 {
@@ -67,7 +77,7 @@
                     // Or use Linq query syntax to get Languages in a string. Then write that string to the file.
                     foreach (var language in Languages)
                     {
-                        writeToFile.Write(language + separator);
+                        writeToFile.Write(language.ToLower() + separator);
                     }
                     writeToFile.WriteLine();
                     for (int i = 0; i < listWithWords.Count; i++)
@@ -95,15 +105,7 @@
         }
         public void Add(params string[] translations)
         {
-            string[] tempString = new string[translations.Length];
-
-            // Har man inte med detta så tar programmet endast det sista värdet man skrev. Ingen aning varför för den borde lägga in en likadan array.
-            //for (int i = 0; i < tempString.Length; i++)
-            //{
-            //    tempString[i] = translations[i];
-           // }
             listWithWords.Add(new Word(translations));
-
         }
 
         public bool Remove(int translation, string word)
@@ -115,14 +117,13 @@
             //                   where w.Translations[translation].Equals(word)
             //                   select w;
 
-            var WhatToRemoveLM = listWithWords.Find(w => w.Translations[translation].Equals(word));
+            var WhatToRemove = listWithWords.Find(w => w.Translations[translation].Equals(word));
 
-            if (WhatToRemoveLM != null)
+            if (WhatToRemove != null)
             {
-                return listWithWords.Remove(WhatToRemoveLM);
+                return listWithWords.Remove(WhatToRemove);
             }
             return false;
-
         }
 
         public int Count()
@@ -134,13 +135,9 @@
         }
         public void List(int sortByTranslation, Action<string[]> showTranslations)
         {
-            // sortByTranslation = Vilket språk listan ska sorteras på.
-            // showTranslations = Callback som anropas för varje ord i listan.
-
             var sortedList = from sl in listWithWords
                              orderby sl.Translations[sortByTranslation]
                              select sl;
-
 
             foreach (var ord in sortedList)
             {
@@ -151,18 +148,14 @@
         }
         public Word GetWordToPractice()
         {
-            // Returnerar slumpmässigt Word från listan
-            // skall ha slumpmässigt valda FromLanguage och ToLanguage(dock inte samma).
-            // Är FromLanguage == 0 så skall man äversätta från språket på första platsen i listan. ToLanguage är sedan språket man skall översätta till. 
-
             Random randomLanguage = new Random();
             int fromLanguage = randomLanguage.Next(Languages.Length);
             int toLanguage = randomLanguage.Next(Languages.Length);
 
-            while (fromLanguage == toLanguage) 
+            while (fromLanguage == toLanguage)
             {
                 fromLanguage++;
-                if(fromLanguage >= Languages.Length)
+                if (fromLanguage >= Languages.Length)
                 {
                     fromLanguage = 0;
                 }
