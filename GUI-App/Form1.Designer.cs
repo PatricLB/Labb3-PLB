@@ -49,6 +49,7 @@
             this.removeWordsButton = new System.Windows.Forms.Button();
             this.languageSortBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -214,6 +215,7 @@
             // 
             // languageSortBox
             // 
+            this.languageSortBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.languageSortBox.FormattingEnabled = true;
             this.languageSortBox.ItemHeight = 15;
             this.languageSortBox.Location = new System.Drawing.Point(651, 306);
@@ -224,6 +226,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(672, 288);
             this.label2.Name = "label2";
@@ -231,11 +234,21 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Sort by...";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(547, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 15);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Antal Ord:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(758, 412);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.languageSortBox);
             this.Controls.Add(this.removeWordsButton);
@@ -280,5 +293,6 @@
         private Button removeWordsButton;
         private ListBox languageSortBox;
         private Label label2;
+        private Label label3;
     }
 }

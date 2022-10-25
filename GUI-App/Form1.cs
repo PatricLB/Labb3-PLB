@@ -68,24 +68,21 @@ namespace GUI_App
             var list = WordList.LoadList(currentItem);
             int value = languageSortBox.SelectedIndex;
 
-            List<string> fullText = new List<string>();
-            list.List(value, s => { fullText.Add(String.Join(";", s)); });
-            foreach (var word in fullText)
-            {
-                listContentBox.Text += word + newLine;
-            }
+            UpdateTextBox(list, value);
+
         }
-        private void UpdateTextBox(WordList words)
+        private void UpdateTextBox(WordList words, int sort = 0)
         {
             List<string> fullText = new List<string>();
             string newLine = Environment.NewLine;
 
-            words.List(0, s => { fullText.Add(String.Join(";", s)); });
+            words.List(sort, s => { fullText.Add(String.Join(";", s)); });
             foreach (var word in fullText)
             {
                 listContentBox.Text += word + newLine;
             }
             
         }
+
     }
 }
