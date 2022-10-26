@@ -118,14 +118,14 @@
             // openToolStripNewList
             // 
             this.openToolStripNewList.Name = "openToolStripNewList";
-            this.openToolStripNewList.Size = new System.Drawing.Size(116, 22);
+            this.openToolStripNewList.Size = new System.Drawing.Size(180, 22);
             this.openToolStripNewList.Text = "New list";
             this.openToolStripNewList.Click += new System.EventHandler(this.openToolStripNewList_Click);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 

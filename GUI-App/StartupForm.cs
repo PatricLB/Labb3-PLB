@@ -5,7 +5,19 @@ namespace GUI_App
     public partial class StartupForm : Form
     {
         public static string newLine = Environment.NewLine;
-        static string currentItem = string.Empty;
+        private static string _currentItem = string.Empty;
+        public static string CurrentItem 
+        { 
+            get 
+            { 
+                return _currentItem;
+            }
+            set 
+            {
+                _currentItem = value;
+            
+            }
+        }
         public static string textBoxInfo = string.Empty;
         public static int wordCount = default;
         public static WordList list;
@@ -19,10 +31,12 @@ namespace GUI_App
         {
             string[] listOfAvailableLists = WordList.GetLists();
             wordListBox.DataSource = listOfAvailableLists;
+
             list = WordList.LoadList(listOfAvailableLists[0].ToString());
-            wordCount = list.Count();
             UpdateTextBox(list);
             languageSortBox.DataSource = list.Languages;
+
+            wordCount = list.Count();
             countLabel.Text = String.Format($"Antal ord: {wordCount}");
         }
 
@@ -30,7 +44,6 @@ namespace GUI_App
         {
             listContentTextBox.Text = string.Empty;
             string currentItem = wordListBox.SelectedItem.ToString();
-            //string value = wordListBox.SelectedIndex.ToString();
 
             list = WordList.LoadList(currentItem);
             UpdateTextBox(list);
@@ -42,8 +55,8 @@ namespace GUI_App
         private void languageSortBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             listContentTextBox.Text = string.Empty;
-            currentItem = wordListBox.SelectedItem.ToString();
-            var list = WordList.LoadList(currentItem);
+            CurrentItem = wordListBox.SelectedItem.ToString();
+            var list = WordList.LoadList(CurrentItem);
             int value = languageSortBox.SelectedIndex;
 
             UpdateTextBox(list, value);
@@ -63,7 +76,16 @@ namespace GUI_App
         }
         private void trainWordsButton_Click(object sender, EventArgs e)
         {
+            DialogResult d;
+            d = MessageBox.Show($"Do you want to practice words from {CurrentItem} ?", "Practice?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+            if (d.Equals(DialogResult.Yes))
+            {
+                PracticeWordForm practiceWord = new PracticeWordForm(this, list);
+                this.Hide();
+                practiceWord.Show();
+                
+            }
         }
 
         private void addWordsButton_Click(object sender, EventArgs e)
@@ -102,7 +124,7 @@ namespace GUI_App
         }
         public static string getListName()
         {
-            return currentItem;
+            return CurrentItem;
         }
 
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
