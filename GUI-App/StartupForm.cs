@@ -4,7 +4,12 @@ namespace GUI_App
 {
     public partial class StartupForm : Form
     {
-        public string newLine = Environment.NewLine;
+        public static string newLine = Environment.NewLine;
+        static string currentItem = string.Empty;
+        public static string textBoxInfo = string.Empty;
+        public static int wordCount = default;
+        public static WordList list;
+
         public StartupForm()
         {
             InitializeComponent();
@@ -13,56 +18,31 @@ namespace GUI_App
         private void StartupForm_Load(object sender, EventArgs e)
         {
             string[] listOfAvailableLists = WordList.GetLists();
-
             wordListBox.DataSource = listOfAvailableLists;
-            var list = WordList.LoadList(listOfAvailableLists[0].ToString());
+            list = WordList.LoadList(listOfAvailableLists[0].ToString());
+            wordCount = list.Count();
             UpdateTextBox(list);
             languageSortBox.DataSource = list.Languages;
-            countLabel.Text = String.Format($"Antal ord: {list.Count()}");
-        }
-
-        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            countLabel.Text = String.Format($"Antal ord: {wordCount}");
         }
 
         private void wordListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listContentBox.Text = string.Empty;
+            listContentTextBox.Text = string.Empty;
             string currentItem = wordListBox.SelectedItem.ToString();
             //string value = wordListBox.SelectedIndex.ToString();
 
-            var list = WordList.LoadList(currentItem);
+            list = WordList.LoadList(currentItem);
             UpdateTextBox(list);
 
             languageSortBox.DataSource = list.Languages;
             countLabel.Text = String.Format($"Antal ord: {list.Count()}");
         }
 
-        private void listContentBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void trainWordsButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void languageSortBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listContentBox.Text = string.Empty;
-            string currentItem = wordListBox.SelectedItem.ToString();
+            listContentTextBox.Text = string.Empty;
+            currentItem = wordListBox.SelectedItem.ToString();
             var list = WordList.LoadList(currentItem);
             int value = languageSortBox.SelectedIndex;
 
@@ -81,20 +61,51 @@ namespace GUI_App
             }
             
         }
-        private void UpdateTextBox(WordList words, int sort = 0)
+        private void trainWordsButton_Click(object sender, EventArgs e)
         {
-            List<string> fullText = new List<string>();
-            string newLine = Environment.NewLine;
 
-            words.List(sort, s => { fullText.Add(String.Join(";", s)); });
-            foreach (var word in fullText)
-            {
-                listContentBox.Text += word + newLine;
-            }
+        }
+
+        private void addWordsButton_Click(object sender, EventArgs e)
+        {
 
         }
 
         private void removeWordsButton_Click(object sender, EventArgs e)
+        {
+            RemoveWordsForm newList = new RemoveWordsForm();
+            newList.Show();
+            getTextBoxInfo();
+        }
+
+        private void openToolStripNewList_Click(object sender, EventArgs e)
+        {
+            NewListForm newList = new NewListForm();
+            newList.Show();
+        }
+
+        public void UpdateTextBox(WordList words, int sort = 0)
+        {
+            List<string> fullText = new List<string>();
+
+            words.List(sort, s => { fullText.Add(String.Join(";", s)); });
+            foreach (var word in fullText)
+            {
+                listContentTextBox.Text += word + newLine;
+            }
+
+        }
+        public void getTextBoxInfo()
+        {
+            textBoxInfo = listContentTextBox.Text;
+
+        }
+        public static string getListName()
+        {
+            return currentItem;
+        }
+
+        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
         }

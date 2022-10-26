@@ -37,9 +37,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripNewList = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.listContentBox = new System.Windows.Forms.TextBox();
+            this.listContentTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.wordListBox = new System.Windows.Forms.ListBox();
             this.trainWordsButton = new System.Windows.Forms.Button();
@@ -109,17 +109,18 @@
             // fileToolStripMenuItem1
             // 
             this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem1,
+            this.openToolStripNewList,
             this.exitToolStripMenuItem1});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
             this.fileToolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem1.Text = "File";
             // 
-            // openToolStripMenuItem1
+            // openToolStripNewList
             // 
-            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-            this.openToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
-            this.openToolStripMenuItem1.Text = "New list";
+            this.openToolStripNewList.Name = "openToolStripNewList";
+            this.openToolStripNewList.Size = new System.Drawing.Size(116, 22);
+            this.openToolStripNewList.Text = "New list";
+            this.openToolStripNewList.Click += new System.EventHandler(this.openToolStripNewList_Click);
             // 
             // exitToolStripMenuItem1
             // 
@@ -128,20 +129,19 @@
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
-            // listContentBox
+            // listContentTextBox
             // 
-            this.listContentBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listContentTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listContentBox.Location = new System.Drawing.Point(195, 59);
-            this.listContentBox.Multiline = true;
-            this.listContentBox.Name = "listContentBox";
-            this.listContentBox.ReadOnly = true;
-            this.listContentBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.listContentBox.Size = new System.Drawing.Size(437, 347);
-            this.listContentBox.TabIndex = 4;
-            this.listContentBox.WordWrap = false;
-            this.listContentBox.TextChanged += new System.EventHandler(this.listContentBox_TextChanged);
+            this.listContentTextBox.Location = new System.Drawing.Point(195, 59);
+            this.listContentTextBox.Multiline = true;
+            this.listContentTextBox.Name = "listContentTextBox";
+            this.listContentTextBox.ReadOnly = true;
+            this.listContentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.listContentTextBox.Size = new System.Drawing.Size(437, 347);
+            this.listContentTextBox.TabIndex = 4;
+            this.listContentTextBox.WordWrap = false;
             // 
             // label1
             // 
@@ -181,12 +181,13 @@
             // addWordsButton
             // 
             this.addWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addWordsButton.Location = new System.Drawing.Point(651, 82);
+            this.addWordsButton.Location = new System.Drawing.Point(651, 80);
             this.addWordsButton.Name = "addWordsButton";
             this.addWordsButton.Size = new System.Drawing.Size(86, 23);
             this.addWordsButton.TabIndex = 8;
             this.addWordsButton.Text = "Lägg till ord";
             this.addWordsButton.UseVisualStyleBackColor = true;
+            this.addWordsButton.Click += new System.EventHandler(this.addWordsButton_Click);
             // 
             // removeWordsButton
             // 
@@ -229,7 +230,7 @@
             this.countLabel.TabIndex = 12;
             this.countLabel.Text = "Antal Ord:";
             // 
-            // Form1
+            // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -242,12 +243,12 @@
             this.Controls.Add(this.trainWordsButton);
             this.Controls.Add(this.wordListBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.listContentBox);
+            this.Controls.Add(this.listContentTextBox);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Listor);
             this.MaximumSize = new System.Drawing.Size(850, 650);
             this.MinimumSize = new System.Drawing.Size(500, 450);
-            this.Name = "Form1";
+            this.Name = "StartupForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.StartupForm_Load);
             this.contextMenuStrip1.ResumeLayout(false);
@@ -267,9 +268,9 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem1;
-        private ToolStripMenuItem openToolStripMenuItem1;
+        private ToolStripMenuItem openToolStripNewList;
         private ToolStripMenuItem exitToolStripMenuItem1;
-        private TextBox listContentBox;
+        private TextBox listContentTextBox;
         private Label label1;
         private ListBox wordListBox;
         private Button trainWordsButton;

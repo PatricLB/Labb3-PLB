@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GUI_App
 {
-    public partial class Form1 : Form
+    public partial class AddWordsToListForm : Form
     {
-        public Form1()
+        public AddWordsToListForm()
         {
             InitializeComponent();
         }
