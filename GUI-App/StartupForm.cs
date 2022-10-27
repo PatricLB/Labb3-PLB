@@ -56,7 +56,7 @@ namespace GUI_App
         {
             listContentTextBox.Text = string.Empty;
             CurrentItem = wordListBox.SelectedItem.ToString();
-            var list = WordList.LoadList(CurrentItem);
+            list = WordList.LoadList(CurrentItem);
             int value = languageSortBox.SelectedIndex;
 
             UpdateTextBox(list, value);
@@ -90,12 +90,21 @@ namespace GUI_App
 
         private void addWordsButton_Click(object sender, EventArgs e)
         {
+            try
+            {
 
+            AddWordsForm addWords = new AddWordsForm(list);
+            addWords.Show();
+            }
+            catch (Exception ObjectDisposedException)
+            {
+                MessageBox.Show("More languages than 5 is not supported in the GUI app.", "To many languages");
+            }
         }
 
         private void removeWordsButton_Click(object sender, EventArgs e)
         {
-            RemoveWordsForm newList = new RemoveWordsForm();
+            RemoveWordsForm newList = new RemoveWordsForm(list);
             newList.Show();
             getTextBoxInfo();
         }

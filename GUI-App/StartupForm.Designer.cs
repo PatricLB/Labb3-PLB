@@ -170,33 +170,33 @@
             // trainWordsButton
             // 
             this.trainWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trainWordsButton.Location = new System.Drawing.Point(651, 42);
+            this.trainWordsButton.Location = new System.Drawing.Point(651, 160);
             this.trainWordsButton.Name = "trainWordsButton";
-            this.trainWordsButton.Size = new System.Drawing.Size(86, 23);
+            this.trainWordsButton.Size = new System.Drawing.Size(95, 68);
             this.trainWordsButton.TabIndex = 7;
-            this.trainWordsButton.Text = "Träna på ord";
+            this.trainWordsButton.Text = "Train words";
             this.trainWordsButton.UseVisualStyleBackColor = true;
             this.trainWordsButton.Click += new System.EventHandler(this.trainWordsButton_Click);
             // 
             // addWordsButton
             // 
             this.addWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addWordsButton.Location = new System.Drawing.Point(651, 80);
+            this.addWordsButton.Location = new System.Drawing.Point(651, 59);
             this.addWordsButton.Name = "addWordsButton";
-            this.addWordsButton.Size = new System.Drawing.Size(86, 23);
+            this.addWordsButton.Size = new System.Drawing.Size(95, 23);
             this.addWordsButton.TabIndex = 8;
-            this.addWordsButton.Text = "Lägg till ord";
+            this.addWordsButton.Text = "Add words ";
             this.addWordsButton.UseVisualStyleBackColor = true;
             this.addWordsButton.Click += new System.EventHandler(this.addWordsButton_Click);
             // 
             // removeWordsButton
             // 
             this.removeWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.removeWordsButton.Location = new System.Drawing.Point(651, 120);
+            this.removeWordsButton.Location = new System.Drawing.Point(651, 97);
             this.removeWordsButton.Name = "removeWordsButton";
-            this.removeWordsButton.Size = new System.Drawing.Size(86, 23);
+            this.removeWordsButton.Size = new System.Drawing.Size(95, 23);
             this.removeWordsButton.TabIndex = 9;
-            this.removeWordsButton.Text = "Ta bort ord";
+            this.removeWordsButton.Text = "Remove Words";
             this.removeWordsButton.UseVisualStyleBackColor = true;
             this.removeWordsButton.Click += new System.EventHandler(this.removeWordsButton_Click);
             // 

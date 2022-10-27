@@ -5,11 +5,13 @@ namespace GUI_App
     public partial class RemoveWordsForm : Form
     {
         List<string> newList = new List<string>();
-        public RemoveWordsForm()
+        WordList currentList;
+        public RemoveWordsForm(WordList list)
         {
             InitializeComponent();
             fileNameTextBox.Text = StartupForm.getListName();
-            UpdateListBox(StartupForm.list);
+            currentList = list;
+            UpdateListBox(currentList);
 
         }
 
@@ -42,8 +44,8 @@ namespace GUI_App
                     wordToRemove = word.Split(";");
                     foreach (var item in wordToRemove)
                     {
-                        StartupForm.list.Remove(0, item);
-                        StartupForm.list.Save();
+                        currentList.Remove(0, item);
+                        currentList.Save();
 
                     }
                 }
