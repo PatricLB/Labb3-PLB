@@ -8,7 +8,7 @@ namespace GUI_App
         private WordList currentList;
         private int numberOfLanguages;
         string[] words;
-        string tempWords;
+        string currentWord;
         bool hasSpecialChar = false;
         private Label[] labels;
         private TextBox[] textboxes;
@@ -18,17 +18,11 @@ namespace GUI_App
             numberOfLanguages = currentList.Languages.Length;
             InitializeComponent();
 
-            setLanguagesFields(currentList);
-            if (currentList.Languages.Length > 4)
-            {
-                this.Close();
-            }
             this.Text = "Adding words to: " + currentList.Name;
             GenerateLanguageInput();
 
             words = new string[currentList.Languages.Length];
         }
-
         private void addWordsButton_Click(object sender, EventArgs e)
         {
             foreach (var textbox in textboxes)
@@ -41,13 +35,13 @@ namespace GUI_App
                 {
                     hasSpecialChar = false;
                 }
-                tempWords += textbox.Text + ";";
+                currentWord += textbox.Text + ";";
             }
             if (!hasSpecialChar)
             {
-                wordsToAdd.Add(tempWords);
+                wordsToAdd.Add(currentWord);
                 addedWordsListBox.DataSource = wordsToAdd.ToArray();
-                tempWords = string.Empty;
+                currentWord = string.Empty;
                 foreach (var textbox in textboxes)
                 {
                     textbox.Text = string.Empty;
@@ -55,42 +49,8 @@ namespace GUI_App
             }
             else
                 MessageBox.Show("Words cannot have special characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                tempWords = string.Empty;
+                currentWord = string.Empty;
         }
-        private void setLanguagesFields(WordList list)
-        {
-            languageLabel1.Text = currentList.Languages[0].ToString() + ":";
-            languageLabel2.Text = currentList.Languages[1].ToString() + ":";
-            if (numberOfLanguages > 2)
-            {
-
-                languageLabel3.Text = currentList.Languages[2] + ":";
-
-                languageLabel4.Text = "No Language";
-                languageTextBox4.Enabled = false;
-                languageLabel4.Enabled = false;
-
-                if (numberOfLanguages == 4)
-                {
-                    languageLabel3.Text = currentList.Languages[2] + ":";
-                    languageLabel4.Text = currentList.Languages[3] + ":";
-                    languageTextBox4.Enabled = true;
-                    languageLabel4.Enabled = true;
-                }
-
-            }
-            else
-            {
-                languageLabel3.Text = "No Language";
-                languageLabel3.Enabled = false;
-                languageTextBox3.Enabled = false;
-
-                languageLabel4.Text = "No Language";
-                languageTextBox4.Enabled = false;
-                languageLabel4.Enabled = false;
-            }
-        }
-
         private void removeWordButton_Click(object sender, EventArgs e)
         {
             wordsToAdd.RemoveAt(addedWordsListBox.SelectedIndex);
@@ -99,7 +59,6 @@ namespace GUI_App
 
         private void saveListButton_Click(object sender, EventArgs e)
         {
-
             DialogResult d;
             d = MessageBox.Show($"Are you sure you want add these words to the list: {currentList.Name}? This will save the words to the file", "Save?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
@@ -119,26 +78,26 @@ namespace GUI_App
             }
         }
 
-        private void languageTextBox1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                languageTextBox2.Focus();
-            }
-        }
+        //private void languageTextBox1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        languageTextBox2.Focus();
+        //    }
+        //}
 
-        private void languageTextBox2_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                if (languageTextBox3.Enabled)
-                {
-                    languageTextBox3.Focus();
-                }
-                else
-                    addWordsButton.Focus();
-            }
-        }
+        //private void languageTextBox2_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        if (languageTextBox3.Enabled)
+        //        {
+        //            languageTextBox3.Focus();
+        //        }
+        //        else
+        //            addWordsButton.Focus();
+        //    }
+        //}
         private void GenerateLanguageInput()
         {
             labels = new Label[currentList.Languages.Length];
