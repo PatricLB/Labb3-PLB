@@ -74,7 +74,6 @@ namespace GUI_App
             }
             catch (Exception ex)
             {
-
                 listContentTextBox.Text = $"List could not be loaded. Error: {ex.Message}";
                 languageSortBox.Text = "N/A";
                 countLabel.Text = "Antal ord: N/A";

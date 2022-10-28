@@ -56,7 +56,7 @@
                 myWordList.Add(currentRow);
             }
 
-            // Kolla ifall alla rader är korrekta med en loop
+            // Kolla ifall alla rader är korrekta med en loop, ifall ja, returnera listan.
 
             return myWordList;
         }

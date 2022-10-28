@@ -65,8 +65,11 @@ namespace GUI_App
                     {
                         if(word.Any(ch => !Char.IsLetter(ch)))
                         {
-                            hasSpecialChar = true;
-                            
+                            hasSpecialChar = true;  
+                        }
+                        if (word.Any(ch => !Char.IsWhiteSpace(ch)))
+                        {
+                            hasSpecialChar = false;
                         }
                     }
                     tempWords += words[i] + ";";
