@@ -9,7 +9,7 @@ namespace GUI_App
         public RemoveWordsForm(WordList list)
         {
             InitializeComponent();
-            fileNameTextBox.Text = StartupForm.getListName();
+            fileNameTextBox.Text = StartupForm.GetListName();
             currentList = list;
             UpdateListBox(currentList);
 

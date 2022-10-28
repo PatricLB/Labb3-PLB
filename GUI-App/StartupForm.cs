@@ -63,29 +63,29 @@ namespace GUI_App
         private void wordListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             listContentTextBox.Text = string.Empty;
-            string currentItem = wordListBox.SelectedItem.ToString();
-
-            list = WordList.LoadList(currentItem);
-            UpdateTextBox(list);
+            CurrentItem = wordListBox.SelectedItem.ToString();
             try
             {
+                list = WordList.LoadList(CurrentItem);
+                UpdateTextBox(list);
+
                 languageSortBox.DataSource = list.Languages;
                 countLabel.Text = $"Antal ord: {list.Count()}";
-
             }
-            catch (NullReferenceException)
+            catch (Exception ex)
             {
+
+                listContentTextBox.Text = $"List could not be loaded. Error: {ex.Message}";
                 languageSortBox.Text = "N/A";
                 countLabel.Text = "Antal ord: N/A";
-            }
 
+            }
         }
 
         private void languageSortBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             listContentTextBox.Text = string.Empty;
             CurrentItem = wordListBox.SelectedItem.ToString();
-            list = WordList.LoadList(CurrentItem);
             int value = languageSortBox.SelectedIndex;
 
             UpdateTextBox(list, value);
@@ -161,9 +161,9 @@ namespace GUI_App
                 }
 
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException ex)
             {
-                listContentTextBox.Text = "List is either corrupt or does not follow the .dat standard required.";
+                throw ex;
             }
 
         }
@@ -172,7 +172,7 @@ namespace GUI_App
             textBoxInfo = listContentTextBox.Text;
 
         }
-        public static string getListName()
+        public static string GetListName()
         {
             return CurrentItem;
         }

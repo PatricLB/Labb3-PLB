@@ -32,33 +32,33 @@
         }
         public static WordList LoadList(string name)
         {
-            try
+            string[] words = File.ReadAllLines(Path.Combine(folderPath, name + ".dat"));
+            string[] currentRow = new string[words.Length];
+
+            languageRow = words[0].ToLower().Split(separator);
+            if (string.IsNullOrEmpty(languageRow[0]))
+                throw new Exception("Top row in file cannot be empty");
+
+
+            languageRow = languageRow.SkipLast(1).ToArray();
+            foreach (var language in languageRow)
             {
-                string[] words = File.ReadAllLines(Path.Combine(folderPath, name + ".dat"));
-
-                string[] currentRow = new string[words.Length];
-
-                languageRow = words[0].ToLower().Split(separator);
-                languageRow = languageRow.SkipLast(1).ToArray();
-
-                var myWordList = new WordList(name, languageRow);
-                for (int i = 1; i < words.Length; i++)
-                {
-                    currentRow = words[i].Split(separator);
-                    currentRow = currentRow.SkipLast(1).ToArray();
-                    myWordList.Add(currentRow);
-                }
-
-                return myWordList;
-
+                if (String.IsNullOrEmpty(language))
+                    throw new Exception("Languages cannot be empty");
             }
-            catch (Exception e)
+
+
+            var myWordList = new WordList(name, languageRow);
+            for (int i = 1; i < words.Length; i++)
             {
-                if (e.GetType().Name == "FileNotFoundException")
-                    Console.WriteLine($"List could not be loaded. File was not found.");
-
-                return null;
+                currentRow = words[i].Split(separator);
+                currentRow = currentRow.SkipLast(1).ToArray();
+                myWordList.Add(currentRow);
             }
+
+            // Kolla ifall alla rader är korrekta med en loop
+
+            return myWordList;
         }
         public void Save()
         {
