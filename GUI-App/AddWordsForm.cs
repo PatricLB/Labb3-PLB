@@ -21,7 +21,7 @@ namespace GUI_App
             this.Text = "Adding words to: " + currentList.Name;
             GenerateLanguageInput();
 
-            words = new string[currentList.Languages.Length];
+            words = new string[numberOfLanguages];
         }
         private void addWordsButton_Click(object sender, EventArgs e)
         {
@@ -79,7 +79,7 @@ namespace GUI_App
         }
         private void GenerateLanguageInput()
         {
-            labels = new Label[currentList.Languages.Length];
+            labels = new Label[numberOfLanguages];
             for (int i = 0; i < labels.Length; i++)
             {
                 labels[i] = new Label();
@@ -88,21 +88,32 @@ namespace GUI_App
                 labels[i].Text = $"{currentList.Languages[i]}: ";
                 panel1.Controls.Add(labels[i]);
             }
-            textboxes = new TextBox[currentList.Languages.Length];
+            textboxes = new TextBox[numberOfLanguages];
             for (int i = 0; i < textboxes.Length; i++)
             {
                 textboxes[i] = new TextBox();
                 textboxes[i].Size = new Size(157, 31);
-                textboxes[i].Location = new Point(139, 50 * i + 20);
-                if (i == textboxes.Length-1)
+                textboxes[i].Location = new Point(125, 50 * i + 20);
+                if (i == textboxes.Length - 1)
                 {
-                textboxes[i].KeyDown += AddWordsForm_KeyDown;
+                    textboxes[i].KeyDown += AddWordsForm_KeyDown;
                 }
 
                 panel1.Controls.Add(textboxes[i]);
             }
         }
+        private void AddWordsForm_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
 
+            DialogResult d;
+            d = MessageBox.Show($"Words have not been added to file. Do you want to exit?", "Exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (d.Equals(DialogResult.Yes))
+            {
+                e.Cancel = false;
+            }
+        }
         private void AddWordsForm_KeyDown(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

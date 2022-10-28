@@ -17,9 +17,9 @@ namespace GUI_App
         {
             if (!String.IsNullOrWhiteSpace(userInputLanguageBox.Text))
             {
-            languages.Add(userInputLanguageBox.Text);
-            languagesToBeAddedBox.DataSource = languages.ToArray();
-            userInputLanguageBox.Text = string.Empty;
+                languages.Add(userInputLanguageBox.Text);
+                languagesToBeAddedBox.DataSource = languages.ToArray();
+                userInputLanguageBox.Text = string.Empty;
             }
             else
             {
@@ -40,11 +40,6 @@ namespace GUI_App
             }
             else
                 MessageBox.Show("Language does not exist in list.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        private void NewListForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void addWordsButton_Click(object sender, EventArgs e)
@@ -71,7 +66,7 @@ namespace GUI_App
                 }
                 catch (ArgumentException)
                 {
-                    MessageBox.Show($"Files does not have a name. Please enter a name for the file.", "File error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Files does not have a valid filename. Please enter a name for the file.", "File error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
         }
@@ -81,35 +76,38 @@ namespace GUI_App
             string fullSökVäg = Path.Combine(WordList.folderPath, fileName + ".dat");
             List<String> language = GetNewLanguages();
 
-            if (string.IsNullOrEmpty(fileName))
-            {
-                throw new ArgumentException();
-            }
+            if (string.IsNullOrEmpty(fileName) || fileName.Any(ch => Char.IsWhiteSpace(ch)))
+                throw new Exception("Files are not allowed to have white spaces or be empty");
+
+            if (language.Count < 2)
+                throw new Exception("Not enough languages. There needs to be atleast two languages in the list.");
+
             if (!File.Exists(fullSökVäg))
+                throw new Exception("File already exists");
+
+            var newList = new WordList(fileName, language.ToArray());
+            using (StreamWriter sr = new StreamWriter(fullSökVäg))
             {
-                var newList = new WordList(fileName, language.ToArray());
-                if (language.Count > 4 || language.Count < 2)
+                foreach (string lang in language)
                 {
-                    throw new ArgumentOutOfRangeException();
-                }
-                else
-                {
-                    using (StreamWriter sr = new StreamWriter(fullSökVäg))
-                    {
-                        foreach (string lang in language)
-                        {
-
-                            sr.Write($"{lang};");
-                        }
-                    }
-
-                    return newList;
-
+                    sr.Write($"{lang};");
                 }
             }
-            else
+
+            return newList;
+        }
+
+
+        private void NewListForm_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+
+            DialogResult d;
+            d = MessageBox.Show($"Changes has not been saved. Do you want to cancel?", "Exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (d.Equals(DialogResult.Yes))
             {
-                throw new IOException();
+                e.Cancel = false;
             }
         }
 

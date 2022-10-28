@@ -13,14 +13,12 @@
 
         public WordList(string name, params string[] languages)
         {
-            // Konstruktor. Sätter properites Name och Languages till parametrarnas värden.
             this.Name = name;
             this.Languages = languages;
 
         }
         public static string[] GetLists()
         {
-            // Returnerar array med namn på alla listor som finns lagrade (utan filändelsen).
             string[] files = Directory.GetFiles(folderPath, "*.dat");
             string[] lists = new string[files.Length];
             for (int i = 0; i < files.Length; i++)
@@ -104,10 +102,6 @@
         }
         public bool Remove(int translation, string word)
         {
-            //var whatToRemove = from w in listWithWords
-            //                   where w.Translations[translation].Equals(word)
-            //                   select w;
-
             var WhatToRemove = listWithWords.Find(w => w.Translations[translation].Equals(word));
 
             if (WhatToRemove != null)

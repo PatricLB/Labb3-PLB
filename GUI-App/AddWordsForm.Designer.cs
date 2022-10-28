@@ -38,10 +38,10 @@
             // 
             // saveListButton
             // 
-            this.saveListButton.Location = new System.Drawing.Point(507, 218);
-            this.saveListButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.saveListButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveListButton.Location = new System.Drawing.Point(483, 174);
             this.saveListButton.Name = "saveListButton";
-            this.saveListButton.Size = new System.Drawing.Size(114, 40);
+            this.saveListButton.Size = new System.Drawing.Size(80, 24);
             this.saveListButton.TabIndex = 8;
             this.saveListButton.Text = "Save List";
             this.saveListButton.UseVisualStyleBackColor = true;
@@ -49,20 +49,20 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(373, 7);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(389, 4);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(120, 25);
+            this.label3.Size = new System.Drawing.Size(77, 15);
             this.label3.TabIndex = 6;
             this.label3.Text = "Added words";
             // 
             // addWordsButton
             // 
-            this.addWordsButton.Location = new System.Drawing.Point(113, 218);
-            this.addWordsButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.addWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addWordsButton.Location = new System.Drawing.Point(79, 174);
             this.addWordsButton.Name = "addWordsButton";
-            this.addWordsButton.Size = new System.Drawing.Size(110, 38);
+            this.addWordsButton.Size = new System.Drawing.Size(77, 23);
             this.addWordsButton.TabIndex = 5;
             this.addWordsButton.Text = "Add words";
             this.addWordsButton.UseVisualStyleBackColor = true;
@@ -70,21 +70,22 @@
             // 
             // addedWordsListBox
             // 
+            this.addedWordsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.addedWordsListBox.FormattingEnabled = true;
-            this.addedWordsListBox.ItemHeight = 25;
-            this.addedWordsListBox.Location = new System.Drawing.Point(373, 37);
-            this.addedWordsListBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.addedWordsListBox.ItemHeight = 15;
+            this.addedWordsListBox.Location = new System.Drawing.Point(389, 22);
             this.addedWordsListBox.Name = "addedWordsListBox";
             this.addedWordsListBox.ScrollAlwaysVisible = true;
-            this.addedWordsListBox.Size = new System.Drawing.Size(243, 154);
+            this.addedWordsListBox.Size = new System.Drawing.Size(171, 124);
             this.addedWordsListBox.TabIndex = 6;
             // 
             // removeWordButton
             // 
-            this.removeWordButton.Location = new System.Drawing.Point(373, 218);
-            this.removeWordButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.removeWordButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.removeWordButton.Location = new System.Drawing.Point(389, 174);
             this.removeWordButton.Name = "removeWordButton";
-            this.removeWordButton.Size = new System.Drawing.Size(107, 38);
+            this.removeWordButton.Size = new System.Drawing.Size(75, 23);
             this.removeWordButton.TabIndex = 7;
             this.removeWordButton.Text = "Remove";
             this.removeWordButton.UseVisualStyleBackColor = true;
@@ -92,26 +93,30 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(8, 7);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(341, 184);
+            this.panel1.Size = new System.Drawing.Size(367, 153);
             this.panel1.TabIndex = 16;
             // 
             // AddWordsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 272);
+            this.ClientSize = new System.Drawing.Size(580, 206);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.removeWordButton);
             this.Controls.Add(this.addedWordsListBox);
             this.Controls.Add(this.addWordsButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.saveListButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AddWordsForm";
             this.Text = "AddWordsTest";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddWordsForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

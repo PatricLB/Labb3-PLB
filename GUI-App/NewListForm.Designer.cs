@@ -116,7 +116,7 @@
             this.MaximizeBox = false;
             this.Name = "NewListForm";
             this.Text = "New language list";
-            this.Load += new System.EventHandler(this.NewListForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NewListForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

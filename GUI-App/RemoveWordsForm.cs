@@ -51,9 +51,18 @@ namespace GUI_App
                 }
                 this.Close();
             }
+        }
+        private void RemoveWordsForm_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
 
+            DialogResult d;
+            d = MessageBox.Show($"Changes has not been saved. Do you want to cancel?", "Exit?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-
+            if (d.Equals(DialogResult.Yes))
+            {
+                e.Cancel = false;
+            }
         }
         private void UpdateListBox(WordList words)
         {

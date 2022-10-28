@@ -93,6 +93,7 @@
             this.Controls.Add(this.label1);
             this.Name = "RemoveWordsForm";
             this.Text = "RemoveWordsForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RemoveWordsForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

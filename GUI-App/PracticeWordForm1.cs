@@ -80,5 +80,10 @@ namespace GUI_App
                 submitAnswerButton_Click(this, new EventArgs());
             }
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

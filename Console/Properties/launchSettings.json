@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Console": {
-      "commandName": "Project",
-      "commandLineArgs": "-practice trasigfils"
+      "commandName": "Project"
     }
   }
 }

@@ -55,7 +55,7 @@ namespace Console
                         }
                         catch (Exception e)
                         {
-                            System.Console.WriteLine($"Could not add words to list. {e.Message}"); ;
+                            System.Console.WriteLine($"Could not add words to list. {e.Message}");
                         }
                     else
                         IncorrectParameters();
@@ -92,7 +92,10 @@ namespace Console
                             }
                         }
                     }
-                    catch (NullReferenceException) { }
+                    catch (Exception e) 
+                    {
+                        System.Console.WriteLine($"Could not remove words to list. {e.Message}");
+                    }
                     break;
 
                 case "-words":
@@ -201,16 +204,20 @@ namespace Console
         }
         public static WordList CreateList(string name, params string[] languages)
         {
-            string fullSökVäg = Path.Combine(WordList.folderPath, name + ".dat");
-            if (!File.Exists(fullSökVäg))
+            string fullPath = Path.Combine(WordList.folderPath, name + ".dat");
+            if (string.IsNullOrEmpty(fullPath) || fullPath.Any(ch => Char.IsWhiteSpace(ch)))
+                throw new Exception("Files are not allowed to have white spaces or be empty");
+
+            if (!File.Exists(fullPath))
             {
                 if (languages.Length < 2)
-                    throw new ArgumentOutOfRangeException("Not enough languages. There needs to be atleast two languages in the list.");
+                    throw new Exception("Not enough languages. There needs to be atleast two languages in the list.");
+
 
                 var newList = new WordList(name, languages);
                 System.Console.WriteLine($"Creating list {name}...");
 
-                using (StreamWriter sr = new StreamWriter(fullSökVäg))
+                using (StreamWriter sr = new StreamWriter(fullPath))
                 {
                     foreach (string language in languages)
                     {
@@ -231,7 +238,7 @@ namespace Console
         {
             if (words.Languages.Length < 2)
             {
-                throw new ArgumentOutOfRangeException("Not enough languages. There needs to be atleast two languages in the list.");
+                throw new Exception("Not enough languages. There needs to be atleast two languages in the list.");
             }
             else
             {
@@ -297,15 +304,15 @@ namespace Console
         public static string CountWordsInList(WordList wordList)
         {
 
-            int antalOrd = wordList.Count();
+            int amountOfWords = wordList.Count();
 
-            if (antalOrd == 0)
+            if (amountOfWords == 0)
             {
                 return "No words in list";
             }
             else
             {
-                return $"Amount of words in '{wordList.Name}': {antalOrd}";
+                return $"Amount of words in '{wordList.Name}': {amountOfWords}";
             }
         }
         public static void IncorrectParameters()
