@@ -31,10 +31,8 @@ namespace GUI_App
 
         private void addWordsButton_Click(object sender, EventArgs e)
         {
-
             foreach (var textbox in textboxes)
             {
-                
                 if (textbox.Text.Any(ch => !Char.IsLetter(ch)))
                 {
                     hasSpecialChar = true;
@@ -57,74 +55,7 @@ namespace GUI_App
             }
             else
                 MessageBox.Show("Words cannot have special characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            tempWords = string.Empty;
-
-            return;
-            
-            hasSpecialChar = false;
-            if (numberOfLanguages == 2 && (languageTextBox1.Text.Equals(String.Empty) || languageTextBox2.Text.Equals(String.Empty)))
-            {
-                MessageBox.Show("Textboxes cannot be empty", "Empty");
-            }
-            else if (numberOfLanguages == 3 && (languageTextBox1.Text.Equals(String.Empty) || languageTextBox2.Text.Equals(String.Empty) || languageTextBox3.Text.Equals(String.Empty)))
-            {
-                MessageBox.Show("Textboxes cannot be empty", "Empty");
-            }
-            else if (numberOfLanguages == 4 && (languageTextBox1.Text.Equals(String.Empty) || languageTextBox2.Text.Equals(String.Empty) || languageTextBox3.Text.Equals(String.Empty) || languageTextBox4.Text.Equals(String.Empty)))
-            {
-                MessageBox.Show("Textboxes cannot be empty", "Empty");
-            }
-            else
-            {
-                words[0] = languageTextBox1.Text;
-                words[1] = languageTextBox2.Text;
-
-
-
-                if (numberOfLanguages == 3)
-                {
-
-                    words[2] = languageTextBox3.Text;
-                }
-                else if (numberOfLanguages == 4)
-                {
-                    words[2] = languageTextBox3.Text;
-                    words[3] = languageTextBox4.Text;
-                }
-
-                for (int i = 0; i < numberOfLanguages; i++)
-                {
-                    foreach (var word in words)
-                    {
-                        if (word.Any(ch => !Char.IsLetter(ch)))
-                        {
-                            hasSpecialChar = true;
-                        }
-                        if (word.Any(ch => !Char.IsWhiteSpace(ch)))
-                        {
-                            hasSpecialChar = false;
-                        }
-                    }
-                    tempWords += words[i] + ";";
-                }
-
-                if (!hasSpecialChar)
-                {
-                    wordsToAdd.Add(tempWords);
-                    tempWords = string.Empty;
-
-                    languageTextBox1.Text = String.Empty;
-                    languageTextBox2.Text = String.Empty;
-                    languageTextBox3.Text = String.Empty;
-                    languageTextBox4.Text = String.Empty;
-
-                    addedWordsListBox.DataSource = wordsToAdd.ToArray();
-                }
-                else
-                    MessageBox.Show("Words cannot have special characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tempWords = string.Empty;
-
-            }
         }
         private void setLanguagesFields(WordList list)
         {
