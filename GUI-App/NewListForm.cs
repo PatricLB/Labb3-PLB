@@ -6,7 +6,7 @@ namespace GUI_App
     {
 
         private List<string> languages = new List<string>();
-        WordList newlyCreatedlist;
+        WordList? newlyCreatedlist;
 
         public NewListForm()
         {

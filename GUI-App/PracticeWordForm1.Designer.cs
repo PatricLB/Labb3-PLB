@@ -39,34 +39,39 @@
             // 
             // userAnswerTextBox
             // 
-            this.userAnswerTextBox.Location = new System.Drawing.Point(101, 151);
+            this.userAnswerTextBox.Location = new System.Drawing.Point(144, 252);
+            this.userAnswerTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.userAnswerTextBox.Name = "userAnswerTextBox";
-            this.userAnswerTextBox.Size = new System.Drawing.Size(121, 23);
+            this.userAnswerTextBox.Size = new System.Drawing.Size(171, 31);
             this.userAnswerTextBox.TabIndex = 0;
+            this.userAnswerTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userAnswerTextBox_KeyDown);
             // 
             // labelFromLang
             // 
             this.labelFromLang.AutoSize = true;
-            this.labelFromLang.Location = new System.Drawing.Point(12, 78);
+            this.labelFromLang.Location = new System.Drawing.Point(17, 130);
+            this.labelFromLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFromLang.Name = "labelFromLang";
-            this.labelFromLang.Size = new System.Drawing.Size(38, 15);
+            this.labelFromLang.Size = new System.Drawing.Size(58, 25);
             this.labelFromLang.TabIndex = 1;
             this.labelFromLang.Text = "From:";
             // 
             // labelToLang
             // 
             this.labelToLang.AutoSize = true;
-            this.labelToLang.Location = new System.Drawing.Point(25, 108);
+            this.labelToLang.Location = new System.Drawing.Point(36, 180);
+            this.labelToLang.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelToLang.Name = "labelToLang";
-            this.labelToLang.Size = new System.Drawing.Size(25, 15);
+            this.labelToLang.Size = new System.Drawing.Size(39, 25);
             this.labelToLang.TabIndex = 3;
             this.labelToLang.Text = "To: ";
             // 
             // submitAnswerButton
             // 
-            this.submitAnswerButton.Location = new System.Drawing.Point(122, 180);
+            this.submitAnswerButton.Location = new System.Drawing.Point(174, 300);
+            this.submitAnswerButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.submitAnswerButton.Name = "submitAnswerButton";
-            this.submitAnswerButton.Size = new System.Drawing.Size(75, 23);
+            this.submitAnswerButton.Size = new System.Drawing.Size(107, 38);
             this.submitAnswerButton.TabIndex = 4;
             this.submitAnswerButton.Text = "Submit";
             this.submitAnswerButton.UseVisualStyleBackColor = true;
@@ -75,34 +80,37 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 154);
+            this.label3.Location = new System.Drawing.Point(17, 257);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 15);
+            this.label3.Size = new System.Drawing.Size(116, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "Your answer: ";
             // 
             // randomWordTextBox
             // 
-            this.randomWordTextBox.Location = new System.Drawing.Point(101, 29);
+            this.randomWordTextBox.Location = new System.Drawing.Point(144, 48);
+            this.randomWordTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.randomWordTextBox.Name = "randomWordTextBox";
             this.randomWordTextBox.ReadOnly = true;
-            this.randomWordTextBox.Size = new System.Drawing.Size(121, 23);
+            this.randomWordTextBox.Size = new System.Drawing.Size(171, 31);
             this.randomWordTextBox.TabIndex = 7;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 32);
+            this.label1.Location = new System.Drawing.Point(17, 53);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 15);
+            this.label1.Size = new System.Drawing.Size(89, 25);
             this.label1.TabIndex = 8;
             this.label1.Text = "Translate: ";
             // 
             // PracticeWordForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 215);
+            this.ClientSize = new System.Drawing.Size(379, 358);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.randomWordTextBox);
             this.Controls.Add(this.label3);
@@ -110,6 +118,7 @@
             this.Controls.Add(this.labelToLang);
             this.Controls.Add(this.labelFromLang);
             this.Controls.Add(this.userAnswerTextBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "PracticeWordForm";
             this.Text = "Word Practice!";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PracticeWordForm_FormClosing);

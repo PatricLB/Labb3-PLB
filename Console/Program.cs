@@ -92,7 +92,7 @@ namespace Console
                             }
                         }
                     }
-                    catch (Exception NullReferenceException) { }
+                    catch (NullReferenceException) { }
                     break;
 
                 case "-words":
@@ -237,7 +237,7 @@ namespace Console
             {
                 bool addMore = true;
                 int index = 0;
-                string input = string.Empty;
+                string? input = string.Empty;
                 do
                 {
                     string[]? ord = new string[words.Languages.Length];

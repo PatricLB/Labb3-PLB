@@ -10,6 +10,8 @@ namespace GUI_App
         string[] words;
         string tempWords;
         bool hasSpecialChar = false;
+        private Label[] labels;
+        private TextBox[] textboxes;
         public AddWordsForm(WordList list)
         {
             currentList = list;
@@ -22,12 +24,43 @@ namespace GUI_App
                 this.Close();
             }
             this.Text = "Adding words to: " + currentList.Name;
+            GenerateLanguageInput();
 
             words = new string[currentList.Languages.Length];
         }
 
         private void addWordsButton_Click(object sender, EventArgs e)
         {
+
+            foreach (var textbox in textboxes)
+            {
+                
+                if (textbox.Text.Any(ch => !Char.IsLetter(ch)))
+                {
+                    hasSpecialChar = true;
+                }
+                if (textbox.Text.Any(ch => Char.IsWhiteSpace(ch)))
+                {
+                    hasSpecialChar = false;
+                }
+                tempWords += textbox.Text + ";";
+            }
+            if (!hasSpecialChar)
+            {
+                wordsToAdd.Add(tempWords);
+                addedWordsListBox.DataSource = wordsToAdd.ToArray();
+                tempWords = string.Empty;
+                foreach (var textbox in textboxes)
+                {
+                    textbox.Text = string.Empty;
+                }
+            }
+            else
+                MessageBox.Show("Words cannot have special characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            tempWords = string.Empty;
+
+            return;
+            
             hasSpecialChar = false;
             if (numberOfLanguages == 2 && (languageTextBox1.Text.Equals(String.Empty) || languageTextBox2.Text.Equals(String.Empty)))
             {
@@ -63,9 +96,9 @@ namespace GUI_App
                 {
                     foreach (var word in words)
                     {
-                        if(word.Any(ch => !Char.IsLetter(ch)))
+                        if (word.Any(ch => !Char.IsLetter(ch)))
                         {
-                            hasSpecialChar = true;  
+                            hasSpecialChar = true;
                         }
                         if (word.Any(ch => !Char.IsWhiteSpace(ch)))
                         {
@@ -89,7 +122,7 @@ namespace GUI_App
                 }
                 else
                     MessageBox.Show("Words cannot have special characters", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    tempWords = string.Empty;
+                tempWords = string.Empty;
 
             }
         }
@@ -135,6 +168,7 @@ namespace GUI_App
 
         private void saveListButton_Click(object sender, EventArgs e)
         {
+
             DialogResult d;
             d = MessageBox.Show($"Are you sure you want add these words to the list: {currentList.Name}? This will save the words to the file", "Save?", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
@@ -156,7 +190,7 @@ namespace GUI_App
 
         private void languageTextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 languageTextBox2.Focus();
             }
@@ -172,6 +206,26 @@ namespace GUI_App
                 }
                 else
                     addWordsButton.Focus();
+            }
+        }
+        private void GenerateLanguageInput()
+        {
+            labels = new Label[currentList.Languages.Length];
+            for (int i = 0; i < labels.Length; i++)
+            {
+                labels[i] = new Label();
+                labels[i].Size = new Size(100, 25);
+                labels[i].Location = new Point(25, 50 * i + 20);
+                labels[i].Text = $"{currentList.Languages[i]}: ";
+                panel1.Controls.Add(labels[i]);
+            }
+            textboxes = new TextBox[currentList.Languages.Length];
+            for (int i = 0; i < textboxes.Length; i++)
+            {
+                textboxes[i] = new TextBox();
+                textboxes[i].Size = new Size(157, 31);
+                textboxes[i].Location = new Point(139, 50 * i + 20);
+                panel1.Controls.Add(textboxes[i]);
             }
         }
     }

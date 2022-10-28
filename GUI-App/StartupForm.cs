@@ -4,10 +4,10 @@ namespace GUI_App
 {
     public partial class StartupForm : Form
     {
-        public static string newLine = Environment.NewLine;
-        private static string _currentItem = string.Empty;
-        string[] listOfAvailableLists;
-        public static string CurrentItem
+        private static string newLine = Environment.NewLine;
+        private static string? _currentItem = string.Empty;
+        string[]? listOfAvailableLists;
+        public static string? CurrentItem
         {
             get
             {
@@ -19,9 +19,9 @@ namespace GUI_App
 
             }
         }
-        public static string textBoxInfo = string.Empty;
-        public static int wordCount = default;
-        public static WordList list;
+        private static string? textBoxInfo;
+        private static int? wordCount = default;
+        private static WordList? list;
 
         public StartupForm()
         {
@@ -60,7 +60,7 @@ namespace GUI_App
 
         }
 
-        private void wordListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void WordListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             listContentTextBox.Text = string.Empty;
             CurrentItem = wordListBox.SelectedItem.ToString();
@@ -102,7 +102,7 @@ namespace GUI_App
             }
 
         }
-        private void trainWordsButton_Click(object sender, EventArgs e)
+        private void TrainWordsButton_Click(object sender, EventArgs e)
         {
             DialogResult d;
             d = MessageBox.Show($"Do you want to practice words from {CurrentItem} ?", "Practice?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -125,7 +125,7 @@ namespace GUI_App
                 addWords.ShowDialog();
                 UpdateTextBox(list);
             }
-            catch (Exception ObjectDisposedException)
+            catch (ObjectDisposedException)
             {
                 MessageBox.Show("More languages than 5 is not supported in the GUI app.", "To many languages");
             }

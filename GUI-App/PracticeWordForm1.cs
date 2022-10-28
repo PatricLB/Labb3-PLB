@@ -4,8 +4,6 @@ namespace GUI_App
 {
     public partial class PracticeWordForm : Form
     {
-
-        private StartupForm startForm;
         int correctAnswers = default;
         int timesPracticed = default;
         float totalSum = default;
@@ -53,8 +51,8 @@ namespace GUI_App
             toLanguage = wordToTrain.ToLanguage.Value;
 
             randomWordTextBox.Text = (string)wordToTrain.Translations[fromLanguage];
-            labelFromLang.Text = String.Format($"From: {trainingList.Languages[fromLanguage]}");
-            labelToLang.Text = String.Format($"To: {trainingList.Languages[toLanguage]}");
+            labelFromLang.Text = $"From: {trainingList.Languages[fromLanguage]}";
+            labelToLang.Text = $"To: {trainingList.Languages[toLanguage]}";
 
             userInput = String.Empty;
             userAnswerTextBox.Text = String.Empty;
@@ -62,7 +60,7 @@ namespace GUI_App
 
         private void PracticeWordForm_FormClosing(Object sender, FormClosingEventArgs e)
         {
-            float totalSum = ((float)correctAnswers / timesPracticed) * 100;
+            totalSum = ((float)correctAnswers / timesPracticed) * 100;
             e.Cancel = true;
 
             DialogResult d;
@@ -72,6 +70,14 @@ namespace GUI_App
             {
                 MessageBox.Show($"Good job! You got {Math.Round(totalSum)}% of the words correctly. \nYou practiced {timesPracticed} words.", "End of Training", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Cancel = false;
+            }
+        }
+
+        private void userAnswerTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Enter)
+            {
+                submitAnswerButton_Click(this, new EventArgs());
             }
         }
     }

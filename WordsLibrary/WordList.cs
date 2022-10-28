@@ -55,7 +55,6 @@
                 currentRow = currentRow.SkipLast(1).ToArray();
                 if (!(currentRow.Length == languageRow.Length))
                 {
-                    
                     if (currentRow.Length == 0)
                     {
                         continue;
@@ -64,9 +63,6 @@
                 }
                 myWordList.Add(currentRow);
             }
-
-            // Kolla ifall alla rader är korrekta med en loop, ifall ja, returnera listan.
-            //myWordList.
 
             return myWordList;
         }

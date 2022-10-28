@@ -124,7 +124,7 @@
             this.wordListBox.Name = "wordListBox";
             this.wordListBox.Size = new System.Drawing.Size(160, 334);
             this.wordListBox.TabIndex = 6;
-            this.wordListBox.SelectedIndexChanged += new System.EventHandler(this.wordListBox_SelectedIndexChanged);
+            this.wordListBox.SelectedIndexChanged += new System.EventHandler(this.WordListBox_SelectedIndexChanged);
             // 
             // trainWordsButton
             // 
@@ -135,7 +135,7 @@
             this.trainWordsButton.TabIndex = 7;
             this.trainWordsButton.Text = "Train words";
             this.trainWordsButton.UseVisualStyleBackColor = true;
-            this.trainWordsButton.Click += new System.EventHandler(this.trainWordsButton_Click);
+            this.trainWordsButton.Click += new System.EventHandler(this.TrainWordsButton_Click);
             // 
             // addWordsButton
             // 
