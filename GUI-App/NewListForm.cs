@@ -11,6 +11,7 @@ namespace GUI_App
         public NewListForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
         private void addLanguageButton_Click(object sender, EventArgs e)

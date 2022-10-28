@@ -5,7 +5,7 @@ namespace GUI_App
     public partial class PracticeWordForm : Form
     {
         int correctAnswers = default;
-        int timesPracticed = default;
+        int timesPracticed = 0;
         float totalSum = default;
 
         string userInput;
@@ -20,6 +20,7 @@ namespace GUI_App
             currentList = trainingList;
 
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             GenerateExcercise(currentList);
 
@@ -68,6 +69,11 @@ namespace GUI_App
 
             if (d.Equals(DialogResult.Yes))
             {
+                if(timesPracticed == 0)
+                {
+                    e.Cancel = false;
+                }
+                else
                 MessageBox.Show($"Good job! You got {Math.Round(totalSum)}% of the words correctly. \nYou practiced {timesPracticed} words.", "End of Training", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Cancel = false;
             }

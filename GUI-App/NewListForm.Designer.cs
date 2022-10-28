@@ -39,18 +39,22 @@
             // 
             // languagesToBeAddedBox
             // 
+            this.languagesToBeAddedBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.languagesToBeAddedBox.FormattingEnabled = true;
             this.languagesToBeAddedBox.ItemHeight = 15;
             this.languagesToBeAddedBox.Location = new System.Drawing.Point(12, 102);
             this.languagesToBeAddedBox.Name = "languagesToBeAddedBox";
-            this.languagesToBeAddedBox.Size = new System.Drawing.Size(107, 109);
+            this.languagesToBeAddedBox.Size = new System.Drawing.Size(131, 109);
             this.languagesToBeAddedBox.TabIndex = 0;
             // 
             // addWordsButton
             // 
+            this.addWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.addWordsButton.Location = new System.Drawing.Point(12, 217);
             this.addWordsButton.Name = "addWordsButton";
-            this.addWordsButton.Size = new System.Drawing.Size(213, 37);
+            this.addWordsButton.Size = new System.Drawing.Size(234, 37);
             this.addWordsButton.TabIndex = 1;
             this.addWordsButton.Text = "Add Words...";
             this.addWordsButton.UseVisualStyleBackColor = true;
@@ -58,15 +62,19 @@
             // 
             // userInputLanguageBox
             // 
+            this.userInputLanguageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.userInputLanguageBox.Location = new System.Drawing.Point(12, 73);
             this.userInputLanguageBox.Name = "userInputLanguageBox";
             this.userInputLanguageBox.PlaceholderText = "Write the language...";
-            this.userInputLanguageBox.Size = new System.Drawing.Size(107, 23);
+            this.userInputLanguageBox.Size = new System.Drawing.Size(131, 23);
             this.userInputLanguageBox.TabIndex = 2;
             // 
             // addLanguageButton
             // 
-            this.addLanguageButton.Location = new System.Drawing.Point(125, 72);
+            this.addLanguageButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.addLanguageButton.Location = new System.Drawing.Point(149, 72);
             this.addLanguageButton.Name = "addLanguageButton";
             this.addLanguageButton.Size = new System.Drawing.Size(97, 23);
             this.addLanguageButton.TabIndex = 3;
@@ -76,7 +84,8 @@
             // 
             // removeLanguageButton
             // 
-            this.removeLanguageButton.Location = new System.Drawing.Point(125, 102);
+            this.removeLanguageButton.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.removeLanguageButton.Location = new System.Drawing.Point(149, 102);
             this.removeLanguageButton.Name = "removeLanguageButton";
             this.removeLanguageButton.Size = new System.Drawing.Size(97, 36);
             this.removeLanguageButton.TabIndex = 4;
@@ -86,6 +95,8 @@
             // 
             // nameOfFileBox
             // 
+            this.nameOfFileBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.nameOfFileBox.Location = new System.Drawing.Point(63, 16);
             this.nameOfFileBox.Name = "nameOfFileBox";
             this.nameOfFileBox.PlaceholderText = "Name of the file..";
@@ -105,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(230, 257);
+            this.ClientSize = new System.Drawing.Size(258, 263);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameOfFileBox);
             this.Controls.Add(this.removeLanguageButton);

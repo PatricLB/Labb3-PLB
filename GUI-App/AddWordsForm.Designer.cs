@@ -114,6 +114,7 @@
             this.Controls.Add(this.addWordsButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.saveListButton);
+            this.MinimumSize = new System.Drawing.Size(596, 245);
             this.Name = "AddWordsForm";
             this.Text = "AddWordsTest";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddWordsForm_FormClosing);
