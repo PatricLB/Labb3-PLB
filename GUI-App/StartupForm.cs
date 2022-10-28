@@ -7,6 +7,8 @@ namespace GUI_App
         private static string newLine = Environment.NewLine;
         private static string? _currentItem = string.Empty;
         string[]? listOfAvailableLists;
+        List<string> noValueList = new List<string>();
+        bool isListOK = true;
         public static string? CurrentItem
         {
             get
@@ -40,6 +42,7 @@ namespace GUI_App
                 list = WordList.LoadList(listOfAvailableLists[0].ToString());
                 UpdateTextBox(list);
                 languageSortBox.DataSource = list.Languages;
+                noValueList.Add("N/A");
 
                 wordCount = list.Count();
                 countLabel.Text = String.Format($"Antal ord: {wordCount}");
@@ -71,12 +74,14 @@ namespace GUI_App
 
                 languageSortBox.DataSource = list.Languages;
                 countLabel.Text = $"Antal ord: {list.Count()}";
+                isListOK = true;
             }
             catch (Exception ex)
             {
+                languageSortBox.DataSource = noValueList;
                 listContentTextBox.Text = $"List could not be loaded. Error: {ex.Message}";
-                languageSortBox.Text = "N/A";
                 countLabel.Text = "Antal ord: N/A";
+                isListOK = false;
 
             }
         }
@@ -104,15 +109,31 @@ namespace GUI_App
         }
         private void TrainWordsButton_Click(object sender, EventArgs e)
         {
-            DialogResult d;
-            d = MessageBox.Show($"Do you want to practice words from {CurrentItem} ?", "Practice?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (d.Equals(DialogResult.Yes))
+            if (!isListOK)
             {
-                PracticeWordForm practiceWord = new PracticeWordForm(list);
-                this.Hide();
-                practiceWord.ShowDialog();
-                this.Show();
+                MessageBox.Show($"List cannot be loaded. Choose a different list.", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult d;
+                d = MessageBox.Show($"Do you want to practice words from {CurrentItem} ?", "Practice?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (d.Equals(DialogResult.Yes))
+                {
+                    try
+                    {
+                    PracticeWordForm practiceWord = new PracticeWordForm(list);
+                    this.Hide();
+                    practiceWord.ShowDialog();
+                    this.Show();
+
+                    }
+                    catch (Exception exc)
+                    {
+                        MessageBox.Show($"Cannot load practice. {exc.Message}", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
 
             }
         }

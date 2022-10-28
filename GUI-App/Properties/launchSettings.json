@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Console": {
+    "GUI-App": {
       "commandName": "Project",
       "commandLineArgs": "-practice massaspråk"
     }

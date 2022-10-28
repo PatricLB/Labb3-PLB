@@ -93,7 +93,6 @@ namespace GUI_App
                     sr.Write($"{lang};");
                 }
             }
-
             return newList;
         }
 

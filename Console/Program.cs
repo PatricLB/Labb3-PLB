@@ -92,7 +92,7 @@ namespace Console
                             }
                         }
                     }
-                    catch (Exception e) 
+                    catch (Exception e)
                     {
                         System.Console.WriteLine($"Could not remove words to list. {e.Message}");
                     }
@@ -167,39 +167,47 @@ namespace Console
             int fromLanguage;
             int toLanguage;
 
-            do
+            try
             {
-                wordToTrain = name.GetWordToPractice();
-                fromLanguage = wordToTrain.FromLanguage.Value;
-                toLanguage = wordToTrain.ToLanguage.Value;
-
-                System.Console.WriteLine($"Translate {wordToTrain.Translations[fromLanguage]} " +
-                    $"from {name.Languages[fromLanguage]} " +
-                    $"to {name.Languages[toLanguage]}");
-
-                userInput = System.Console.ReadLine();
-                if (String.IsNullOrWhiteSpace(userInput))
+                do
                 {
-                    continueTraining = false;
-                    break;
-                }
-                if (userInput.ToLower() == wordToTrain.Translations[toLanguage].ToLower())
-                {
-                    correctAnswers++;
-                    System.Console.WriteLine("Correct!");
-                }
-                else
-                {
-                    System.Console.WriteLine("Wrong answer!");
-                }
+                    wordToTrain = name.GetWordToPractice();
+                    fromLanguage = wordToTrain.FromLanguage.Value;
+                    toLanguage = wordToTrain.ToLanguage.Value;
 
-                timesPracticed++;
+                    System.Console.WriteLine($"Translate {wordToTrain.Translations[fromLanguage]} " +
+                        $"from {name.Languages[fromLanguage]} " +
+                        $"to {name.Languages[toLanguage]}");
 
-            } while (continueTraining);
-            float totalSum = ((float)correctAnswers / timesPracticed) * 100;
+                    userInput = System.Console.ReadLine();
+                    if (String.IsNullOrWhiteSpace(userInput))
+                    {
+                        continueTraining = false;
+                        break;
+                    }
+                    if (userInput.ToLower() == wordToTrain.Translations[toLanguage].ToLower())
+                    {
+                        correctAnswers++;
+                        System.Console.WriteLine("Correct!");
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Wrong answer!");
+                    }
 
-            System.Console.WriteLine($"You practiced {timesPracticed} words.");
-            System.Console.WriteLine($"You got {Math.Round(totalSum)}% of the words answered correctly! ");
+                    timesPracticed++;
+
+                } while (continueTraining);
+                float totalSum = ((float)correctAnswers / timesPracticed) * 100;
+
+                System.Console.WriteLine($"You practiced {timesPracticed} words.");
+                System.Console.WriteLine($"You got {Math.Round(totalSum)}% of the words answered correctly! ");
+
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"Could not load practice. {e.Message}");
+            }
 
         }
         public static WordList CreateList(string name, params string[] languages)

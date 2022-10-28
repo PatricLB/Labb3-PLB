@@ -140,6 +140,9 @@
                     fromLanguage = 0;
                 }
             }
+            if (listWithWords.Count == 0)
+                throw new Exception("Cannot practice an empty list!");
+
             var randomWord = listWithWords[Random.Shared.Next(listWithWords.Count)];
             var returnWord = new Word(fromLanguage, toLanguage, randomWord.Translations);
 
