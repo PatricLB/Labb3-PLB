@@ -17,11 +17,6 @@ namespace GUI_App
         WordList currentList;
 
         // Behöver fields för listans namn så att jag kan använda den infon för att hämta ett random word från wordlist! 
-        public PracticeWordForm(StartupForm startup, WordList trainingList) : this(trainingList)
-        {
-            startForm = startup;
-
-        }
         public PracticeWordForm(WordList trainingList)
         {
             currentList = trainingList;
@@ -77,7 +72,6 @@ namespace GUI_App
             {
                 MessageBox.Show($"Good job! You got {Math.Round(totalSum)}% of the words correctly. \nYou practiced {timesPracticed} words.", "End of Training", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Cancel = false;
-                startForm.Show();
             }
         }
     }

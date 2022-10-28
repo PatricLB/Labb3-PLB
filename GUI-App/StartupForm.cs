@@ -6,16 +6,17 @@ namespace GUI_App
     {
         public static string newLine = Environment.NewLine;
         private static string _currentItem = string.Empty;
-        public static string CurrentItem 
-        { 
-            get 
-            { 
+        string[] listOfAvailableLists;
+        public static string CurrentItem
+        {
+            get
+            {
                 return _currentItem;
             }
-            set 
+            set
             {
                 _currentItem = value;
-            
+
             }
         }
         public static string textBoxInfo = string.Empty;
@@ -24,20 +25,39 @@ namespace GUI_App
 
         public StartupForm()
         {
+            if (!Directory.Exists(WordList.folderPath))
+                Directory.CreateDirectory(WordList.folderPath);
+
             InitializeComponent();
+
         }
 
         private void StartupForm_Load(object sender, EventArgs e)
         {
-            string[] listOfAvailableLists = WordList.GetLists();
+            try
+            {
+                LoadAvailableLists();
+                list = WordList.LoadList(listOfAvailableLists[0].ToString());
+                UpdateTextBox(list);
+                languageSortBox.DataSource = list.Languages;
+
+                wordCount = list.Count();
+                countLabel.Text = String.Format($"Antal ord: {wordCount}");
+                listContentTextBox.SelectionStart = 0;
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void LoadAvailableLists()
+        {
+            listOfAvailableLists = WordList.GetLists();
             wordListBox.DataSource = listOfAvailableLists;
 
-            list = WordList.LoadList(listOfAvailableLists[0].ToString());
-            UpdateTextBox(list);
-            languageSortBox.DataSource = list.Languages;
-
-            wordCount = list.Count();
-            countLabel.Text = String.Format($"Antal ord: {wordCount}");
         }
 
         private void wordListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,9 +67,18 @@ namespace GUI_App
 
             list = WordList.LoadList(currentItem);
             UpdateTextBox(list);
+            try
+            {
+                languageSortBox.DataSource = list.Languages;
+                countLabel.Text = $"Antal ord: {list.Count()}";
 
-            languageSortBox.DataSource = list.Languages;
-            countLabel.Text = String.Format($"Antal ord: {list.Count()}");
+            }
+            catch (NullReferenceException)
+            {
+                languageSortBox.Text = "N/A";
+                countLabel.Text = "Antal ord: N/A";
+            }
+
         }
 
         private void languageSortBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,7 +101,7 @@ namespace GUI_App
             {
                 Environment.Exit(0);
             }
-            
+
         }
         private void trainWordsButton_Click(object sender, EventArgs e)
         {
@@ -81,10 +110,11 @@ namespace GUI_App
 
             if (d.Equals(DialogResult.Yes))
             {
-                PracticeWordForm practiceWord = new PracticeWordForm(this, list);
+                PracticeWordForm practiceWord = new PracticeWordForm(list);
                 this.Hide();
-                practiceWord.Show();
-                
+                practiceWord.ShowDialog();
+                this.Show();
+
             }
         }
 
@@ -92,9 +122,9 @@ namespace GUI_App
         {
             try
             {
-
-            AddWordsForm addWords = new AddWordsForm(list);
-            addWords.Show();
+                AddWordsForm addWords = new AddWordsForm(list);
+                addWords.ShowDialog();
+                UpdateTextBox(list);
             }
             catch (Exception ObjectDisposedException)
             {
@@ -105,24 +135,35 @@ namespace GUI_App
         private void removeWordsButton_Click(object sender, EventArgs e)
         {
             RemoveWordsForm newList = new RemoveWordsForm(list);
-            newList.Show();
+            newList.ShowDialog();
             getTextBoxInfo();
+            UpdateTextBox(list);
         }
 
         private void openToolStripNewList_Click(object sender, EventArgs e)
         {
             NewListForm newList = new NewListForm();
-            newList.Show();
+            newList.ShowDialog();
+            LoadAvailableLists();
         }
 
         public void UpdateTextBox(WordList words, int sort = 0)
         {
-            List<string> fullText = new List<string>();
-
-            words.List(sort, s => { fullText.Add(String.Join(";", s)); });
-            foreach (var word in fullText)
+            try
             {
-                listContentTextBox.Text += word + newLine;
+                listContentTextBox.Text = String.Empty;
+                List<string> fullText = new List<string>();
+
+                words.List(sort, s => { fullText.Add(String.Join(";", s)); });
+                foreach (var word in fullText)
+                {
+                    listContentTextBox.Text += word + newLine;
+                }
+
+            }
+            catch (NullReferenceException)
+            {
+                listContentTextBox.Text = "List is either corrupt or does not follow the .dat standard required.";
             }
 
         }
@@ -134,11 +175,6 @@ namespace GUI_App
         public static string getListName()
         {
             return CurrentItem;
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
         }
     }
 }

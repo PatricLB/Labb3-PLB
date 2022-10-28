@@ -28,13 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Listor = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripNewList = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +42,6 @@
             this.languageSortBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.countLabel = new System.Windows.Forms.Label();
-            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,43 +54,9 @@
             this.Listor.TabIndex = 1;
             this.Listor.Text = "Listor";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 92);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -118,14 +77,14 @@
             // openToolStripNewList
             // 
             this.openToolStripNewList.Name = "openToolStripNewList";
-            this.openToolStripNewList.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripNewList.Size = new System.Drawing.Size(116, 22);
             this.openToolStripNewList.Text = "New list";
             this.openToolStripNewList.Click += new System.EventHandler(this.openToolStripNewList_Click);
             // 
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
@@ -163,14 +122,14 @@
             this.wordListBox.ItemHeight = 15;
             this.wordListBox.Location = new System.Drawing.Point(12, 57);
             this.wordListBox.Name = "wordListBox";
-            this.wordListBox.Size = new System.Drawing.Size(160, 349);
+            this.wordListBox.Size = new System.Drawing.Size(160, 334);
             this.wordListBox.TabIndex = 6;
             this.wordListBox.SelectedIndexChanged += new System.EventHandler(this.wordListBox_SelectedIndexChanged);
             // 
             // trainWordsButton
             // 
             this.trainWordsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.trainWordsButton.Location = new System.Drawing.Point(651, 160);
+            this.trainWordsButton.Location = new System.Drawing.Point(651, 191);
             this.trainWordsButton.Name = "trainWordsButton";
             this.trainWordsButton.Size = new System.Drawing.Size(95, 68);
             this.trainWordsButton.TabIndex = 7;
@@ -207,7 +166,7 @@
             this.languageSortBox.ItemHeight = 15;
             this.languageSortBox.Location = new System.Drawing.Point(651, 306);
             this.languageSortBox.Name = "languageSortBox";
-            this.languageSortBox.Size = new System.Drawing.Size(95, 94);
+            this.languageSortBox.Size = new System.Drawing.Size(95, 79);
             this.languageSortBox.TabIndex = 10;
             this.languageSortBox.SelectedIndexChanged += new System.EventHandler(this.languageSortBox_SelectedIndexChanged);
             // 
@@ -246,12 +205,11 @@
             this.Controls.Add(this.listContentTextBox);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Listor);
-            this.MaximumSize = new System.Drawing.Size(850, 650);
-            this.MinimumSize = new System.Drawing.Size(500, 450);
+            this.MaximumSize = new System.Drawing.Size(848, 644);
+            this.MinimumSize = new System.Drawing.Size(498, 444);
             this.Name = "StartupForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.StartupForm_Load);
-            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -261,11 +219,6 @@
 
         #endregion
         private Label Listor;
-        private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem openToolStripMenuItem;
-        private ToolStripMenuItem saveToolStripMenuItem;
-        private ToolStripMenuItem exitToolStripMenuItem;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem1;
         private ToolStripMenuItem openToolStripNewList;

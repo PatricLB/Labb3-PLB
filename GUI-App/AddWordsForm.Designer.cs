@@ -48,21 +48,23 @@
             this.languageTextBox1.Location = new System.Drawing.Point(97, 12);
             this.languageTextBox1.Name = "languageTextBox1";
             this.languageTextBox1.Size = new System.Drawing.Size(111, 23);
-            this.languageTextBox1.TabIndex = 2;
+            this.languageTextBox1.TabIndex = 1;
+            this.languageTextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.languageTextBox1_KeyDown);
             // 
             // languageTextBox2
             // 
             this.languageTextBox2.Location = new System.Drawing.Point(97, 41);
             this.languageTextBox2.Name = "languageTextBox2";
             this.languageTextBox2.Size = new System.Drawing.Size(111, 23);
-            this.languageTextBox2.TabIndex = 3;
+            this.languageTextBox2.TabIndex = 2;
+            this.languageTextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.languageTextBox2_KeyDown);
             // 
             // saveListButton
             // 
             this.saveListButton.Location = new System.Drawing.Point(360, 131);
             this.saveListButton.Name = "saveListButton";
             this.saveListButton.Size = new System.Drawing.Size(75, 23);
-            this.saveListButton.TabIndex = 5;
+            this.saveListButton.TabIndex = 8;
             this.saveListButton.Text = "Save List";
             this.saveListButton.UseVisualStyleBackColor = true;
             this.saveListButton.Click += new System.EventHandler(this.saveListButton_Click);
@@ -81,21 +83,21 @@
             this.languageTextBox3.Location = new System.Drawing.Point(97, 70);
             this.languageTextBox3.Name = "languageTextBox3";
             this.languageTextBox3.Size = new System.Drawing.Size(111, 23);
-            this.languageTextBox3.TabIndex = 8;
+            this.languageTextBox3.TabIndex = 3;
             // 
             // languageTextBox4
             // 
             this.languageTextBox4.Location = new System.Drawing.Point(97, 102);
             this.languageTextBox4.Name = "languageTextBox4";
             this.languageTextBox4.Size = new System.Drawing.Size(111, 23);
-            this.languageTextBox4.TabIndex = 10;
+            this.languageTextBox4.TabIndex = 4;
             // 
             // addWordsButton
             // 
-            this.addWordsButton.Location = new System.Drawing.Point(115, 131);
+            this.addWordsButton.Location = new System.Drawing.Point(113, 131);
             this.addWordsButton.Name = "addWordsButton";
-            this.addWordsButton.Size = new System.Drawing.Size(75, 23);
-            this.addWordsButton.TabIndex = 11;
+            this.addWordsButton.Size = new System.Drawing.Size(77, 23);
+            this.addWordsButton.TabIndex = 5;
             this.addWordsButton.Text = "Add words";
             this.addWordsButton.UseVisualStyleBackColor = true;
             this.addWordsButton.Click += new System.EventHandler(this.addWordsButton_Click);
@@ -144,14 +146,14 @@
             this.addedWordsListBox.Name = "addedWordsListBox";
             this.addedWordsListBox.ScrollAlwaysVisible = true;
             this.addedWordsListBox.Size = new System.Drawing.Size(171, 94);
-            this.addedWordsListBox.TabIndex = 16;
+            this.addedWordsListBox.TabIndex = 6;
             // 
             // removeWordButton
             // 
             this.removeWordButton.Location = new System.Drawing.Point(261, 131);
             this.removeWordButton.Name = "removeWordButton";
             this.removeWordButton.Size = new System.Drawing.Size(75, 23);
-            this.removeWordButton.TabIndex = 17;
+            this.removeWordButton.TabIndex = 7;
             this.removeWordButton.Text = "Remove";
             this.removeWordButton.UseVisualStyleBackColor = true;
             this.removeWordButton.Click += new System.EventHandler(this.removeWordButton_Click);

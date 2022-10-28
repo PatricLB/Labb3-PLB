@@ -150,5 +150,26 @@ namespace GUI_App
                 this.Close();
             }
         }
+
+        private void languageTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                languageTextBox2.Focus();
+            }
+        }
+
+        private void languageTextBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (languageTextBox3.Enabled)
+                {
+                    languageTextBox3.Focus();
+                }
+                else
+                    addWordsButton.Focus();
+            }
+        }
     }
 }

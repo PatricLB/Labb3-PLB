@@ -32,7 +32,7 @@ namespace GUI_App
 
         private void removeLanguageButton_Click(object sender, EventArgs e)
         {
-            string currentItem = languagesToBeAddedBox.SelectedItem.ToString();
+            string? currentItem = languagesToBeAddedBox.SelectedItem?.ToString();
             if (languages.Contains(currentItem))
             {
                 languages.Remove(currentItem);
@@ -57,8 +57,8 @@ namespace GUI_App
                 {
                     newlyCreatedlist = CreateFileInDir();
                     AddWordsForm addWords = new AddWordsForm(newlyCreatedlist);
-                    addWords.Show();
-
+                    addWords.ShowDialog();
+                    this.Close();
 
                 }
                 catch (ArgumentOutOfRangeException)

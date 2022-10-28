@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-using WordsLibrary;
+﻿using WordsLibrary;
 
 namespace Console
 {
@@ -13,7 +12,7 @@ namespace Console
             string nameOfList = String.Empty;
 
             if (args.Length == 0)
-                IncorrectAmountOfParameters();
+                IncorrectParameters();
             else if (args.Length == 1)
                 nameOfList = String.Empty;
             else
@@ -21,20 +20,29 @@ namespace Console
 
             switch (args[0].ToLower())
             {
-                case "-lists": 
+                case "-lists":
                     if (args.Length < 2)
                         PrintAllLists();
                     else
-                        IncorrectAmountOfParameters();
+                        IncorrectParameters();
                     break;
 
                 case "-new":
-                    List<string> lang = new List<string>();
-                    for (int i = 2; i < args.Length; i++)
+                    try
                     {
-                        lang.Add(args[i]);
+                        List<string> lang = new List<string>();
+                        for (int i = 2; i < args.Length; i++)
+                        {
+                            lang.Add(args[i]);
+                        }
+
+                        CreateList(nameOfList, lang.ToArray());
+
                     }
-                    CreateList(nameOfList, lang.ToArray());
+                    catch (Exception e)
+                    {
+                        System.Console.WriteLine($"Problem creating file. {e.Message}");
+                    }
                     break;
 
                 case "-add":
@@ -47,10 +55,10 @@ namespace Console
                         }
                         catch (Exception e)
                         {
-                            System.Console.WriteLine($"Could not add words to list."); ;
+                            System.Console.WriteLine($"Could not add words to list. {e.Message}"); ;
                         }
                     else
-                        IncorrectAmountOfParameters();
+                        IncorrectParameters();
                     break;
 
                 case "-remove":
@@ -84,7 +92,7 @@ namespace Console
                             }
                         }
                     }
-                    catch (Exception NullReferenceException){}
+                    catch (Exception NullReferenceException) { }
                     break;
 
                 case "-words":
@@ -96,15 +104,16 @@ namespace Console
                             int index = Array.IndexOf(wordsToSort.Languages, args[2].ToLower());
 
                             wordsToSort.List(index, s => { System.Console.WriteLine(String.Join("\t | ", s)); });
-                        }else
-                        System.Console.WriteLine("Language does not exist. Try again.");
+                        }
+                        else
+                            System.Console.WriteLine("Language does not exist. Try again.");
                     }
                     else if (args.Length < 3)
                     {
                         wordsToSort.List(0, s => { System.Console.WriteLine(String.Join("\t | ", s)); });
                     }
                     else
-                        IncorrectAmountOfParameters();
+                        IncorrectParameters();
                     break;
 
                 case "-count":
@@ -116,7 +125,7 @@ namespace Console
                             System.Console.WriteLine(CountWordsInList(listToCount));
                         }
                         else
-                            IncorrectAmountOfParameters();
+                            IncorrectParameters();
                     }
                     catch (Exception) { }
                     break;
@@ -128,11 +137,11 @@ namespace Console
                         TrainWords(listToTrain);
                     }
                     else
-                        IncorrectAmountOfParameters();
+                        IncorrectParameters();
                     break;
 
                 default:
-                    IncorrectAmountOfParameters();
+                    IncorrectParameters();
                     break;
             }
         }
@@ -187,10 +196,12 @@ namespace Console
             string fullSökVäg = Path.Combine(WordList.folderPath, name + ".dat");
             if (!File.Exists(fullSökVäg))
             {
+                if (languages.Length < 2)
+                    throw new ArgumentOutOfRangeException("Not enough languages. There needs to be atleast two languages in the list.");
+
                 var newList = new WordList(name, languages);
                 System.Console.WriteLine($"Creating list {name}...");
 
-                System.Console.WriteLine(fullSökVäg);
                 using (StreamWriter sr = new StreamWriter(fullSökVäg))
                 {
                     foreach (string language in languages)
@@ -206,16 +217,13 @@ namespace Console
                 return newList;
             }
             else
-            {
-                System.Console.WriteLine($"File '{name}' cannot be created. It already exists");
-                return null;
-            }
+                throw new Exception("File already exists");
         }
         public static void AddWordToList(WordList words)
         {
-            if (words.Languages.Length == 0)
+            if (words.Languages.Length < 2)
             {
-                throw new NullReferenceException();
+                throw new ArgumentOutOfRangeException("Not enough languages. There needs to be atleast two languages in the list.");
             }
             else
             {
@@ -276,7 +284,6 @@ namespace Console
         }
         public static bool RemoveWordFromList(WordList wordList, int translation, string word)
         {
-
             return wordList.Remove(translation, word.ToLower());
         }
         public static string CountWordsInList(WordList wordList)
@@ -293,7 +300,7 @@ namespace Console
                 return $"Amount of words in '{wordList.Name}': {antalOrd}";
             }
         }
-        public static void IncorrectAmountOfParameters()
+        public static void IncorrectParameters()
         {
             string[] choices = new string[7]
                 {"-lists",
