@@ -77,27 +77,6 @@ namespace GUI_App
                 this.Close();
             }
         }
-
-        //private void languageTextBox1_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        languageTextBox2.Focus();
-        //    }
-        //}
-
-        //private void languageTextBox2_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        if (languageTextBox3.Enabled)
-        //        {
-        //            languageTextBox3.Focus();
-        //        }
-        //        else
-        //            addWordsButton.Focus();
-        //    }
-        //}
         private void GenerateLanguageInput()
         {
             labels = new Label[currentList.Languages.Length];
@@ -115,7 +94,20 @@ namespace GUI_App
                 textboxes[i] = new TextBox();
                 textboxes[i].Size = new Size(157, 31);
                 textboxes[i].Location = new Point(139, 50 * i + 20);
+                if (i == textboxes.Length-1)
+                {
+                textboxes[i].KeyDown += AddWordsForm_KeyDown;
+                }
+
                 panel1.Controls.Add(textboxes[i]);
+            }
+        }
+
+        private void AddWordsForm_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                addWordsButton_Click(this, new EventArgs());
             }
         }
     }
