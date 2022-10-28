@@ -53,10 +53,20 @@
             {
                 currentRow = words[i].Split(separator);
                 currentRow = currentRow.SkipLast(1).ToArray();
+                if (!(currentRow.Length == languageRow.Length))
+                {
+                    
+                    if (currentRow.Length == 0)
+                    {
+                        continue;
+                    }
+                    throw new Exception("Not a valid list. Number of translations =/= languages.");
+                }
                 myWordList.Add(currentRow);
             }
 
             // Kolla ifall alla rader är korrekta med en loop, ifall ja, returnera listan.
+            //myWordList.
 
             return myWordList;
         }

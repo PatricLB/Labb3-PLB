@@ -133,8 +133,16 @@ namespace Console
                 case "-practice":
                     if (args.Length == 2)
                     {
-                        var listToTrain = WordList.LoadList(nameOfList);
-                        TrainWords(listToTrain);
+                        try
+                        {
+                            var listToTrain = WordList.LoadList(nameOfList);
+                            TrainWords(listToTrain);
+
+                        }
+                        catch (Exception e)
+                        {
+                            System.Console.WriteLine($"Error: {e.Message}");
+                        }
                     }
                     else
                         IncorrectParameters();
